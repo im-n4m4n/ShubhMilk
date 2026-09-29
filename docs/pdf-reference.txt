@@ -1,0 +1,566 @@
+===== .zwork\attachments\baaf4ddb-cc08-4024-b11d-f36da4de812a\premium-website-workflow.pdf =====
+--- page 1/7 ---
+A STEP-BY-STEP WORKFLOW
+The Premium
+ Workflow
+How to build modern, high-quality websites with AI tools, a real 3D
+pipeline and a production backend — faster, easier, and without
+feeling lost.
+Next.js · React · Lenis · GSAP · Three.js Higgsfield · Tripo AI · Blender
+Neon · Supabase · Spring Boot
+Reference
+01
+Stack
+02
+Visuals + 3D
+03
+Build
+04
+Components
+05
+Backend
+06
+Ship
+07
+Before you start
+This isn't a list of prompts. It's a repeatable system: collect direction,
+assemble the right stack, generate visuals and 3D assets, build in
+layers, borrow solved components, and wire up only as much
+backend as the project needs. Follow it in order and you stop staring at a
+blank editor.
+You don't need
+To know every line of code before you start. To model 3D assets by hand. To write your own auth
+system from scratch. To design a component that's already been solved.
+You need
+Basic computer skills, patience, strong references, and the ability to explain what you want clearly
+— to AI, and to yourself.
+01 Collect references
+--- page 2/7 ---
+You can't build a premium website without visual direction. Most beginners
+skip this and open an AI tool cold — that's what produces generic-looking
+sites. Even 20 minutes of research changes the quality of the ﬁnal build.
+Collect, per project
+5–8 strong visual references Typography styles Colors & moods Animation ideas
+Layout inspiration
+Pick one direction
+Minimal luxury brand Modern SaaS startup Vintage editorial Dark futuristic UI
+Best platforms
+Pinterest
+Overall visual style and mood — editorial
+typography, cinematic landing pages, luxury
+branding.
+MotionSites
+Animation inspiration and interactive
+websites, section by section.
+Behance
+Full design case studies and complete
+systems, not just single screens.
+Dribbble
+Small UI details — buttons, forms, hover
+eﬀects, cards.
+Don't save random designs. Before collecting, write your style in one sentence — "modern dark
+AI startup with cinematic motion" — then only save what matches it.
+02 Assemble your stack expanded
+Set everything up once and every site after this one gets faster. Four layers:
+what you plan with, what you build the interface in, what generates content
+and 3D assets, and what stores data.
+Frontend & motion
+Framework
+Next.js
+The React framework you build on — routing,
+rendering and deployment handled, so you're
+not reinventing the basics.
+UI layer
+React
+The component model everything else
+mounts into — GSAP timelines, Three.js
+canvases and your premium components
+alike.
+--- page 3/7 ---
+Scroll
+Lenis
+Smooth-scroll library. Makes the page feel like
+one weighted, continuous motion instead of
+the browser's default jump-scroll.
+Animation
+GSAP
+Timeline-based animation engine — scroll-
+triggered reveals, hover states, the
+transitions between sections.
+3D / WebGL
+Three.js
+Renders anything three-dimensional in the
+browser — hero scenes, product viewers,
+interactive backgrounds.
+Planning
+Claude + Claude Code
+Claude for brainstorming, prompts and site
+planning. Claude Code for building, editing
+ﬁles and installing packages.
+AI content & 3D generation
+New
+Higgsfield
+AI image and video generation for hero
+visuals, product shots and short cinematic
+loops — one tool covering what used to take
+two.
+New
+Tripo AI
+Turns a reference image or prompt into a 3D
+model — the fastest way to get a usable
+mesh for a hero scene without modeling from
+scratch.
+New
+Blender
+Clean up, retopologize and export what Tripo
+AI generates — compress and optimize
+before it goes into a Three.js scene.
+Add-ons worth installing
+UI/UX design systems Frontend design libraries Theme generators
+Website testing tools
+Don't install everything at once. Start simple, build 2–3 websites ﬁrst, then slowly expand your
+workﬂow.
+03 Visuals, motion & 3D assets
+--- page 4/7 ---
+The hero section is usually the most important part of the website — a strong
+visual (2D or 3D) instantly makes the whole site feel premium.
+01 Generate images
+Google AI Studio or Higgsﬁeld for hero visuals and animated backgrounds. The more speciﬁc the
+prompt, the better the result.
+Lighting Mood Colors Camera angle Environment Style
+02 Generate 3D assets New
+Feed a reference image or prompt into Tripo AI to get a ﬁrst 3D model. Bring it into Blender to
+clean the mesh, retopologize and export as a web-ready glTF/GLB before it ever touches Three.js.
+03 Animate it
+Kling AI or Higgsﬁeld turn a still into a short moving loop. GSAP and Lenis drive on-page scroll
+motion; Three.js handles real-time interaction with any 3D asset. Keep movement simple — too
+much motion reads as messy.
+Slow zoom-in Camera pan Floating motion Subtle parallax Auto-rotate (3D)
+04 Compress everything
+EZGIF for videos and GIFs. Draco or meshopt compression for 3D models. A fast site feels more
+professional than a heavy one, on every device.
+Good visuals come from good references. If phase 01 was weak, every AI output here will be
+weak too — 2D or 3D.
+04 Build the website
+Don't ask AI to build the entire site in one prompt. Build in three rounds, in
+Next.js and React, and add complexity only after the layer below it is solid.
+Round 1 — Structure
+Layout and page sections
+Spacing and grid
+Typography hierarchy
+No animation yet — build the skeleton ﬁrst
+--- page 5/7 ---
+Round 2 — Motion
+Hero video or Three.js canvas
+Scroll eﬀects with GSAP + Lenis
+Section transitions
+Keep animations subtle
+Round 3 — Polish
+Buttons and spacing
+Colors and contrast
+Hover states
+Micro-interactions
+AI will make mistakes — that's normal. Don't restart the whole project. Explain what looks
+wrong, what should change, and what feeling you want. Treat it like a designer you're giving
+feedback to, not a vending machine.
+05 Add premium components
+Some sections are already solved perfectly. Don't rebuild contact forms,
+pricing tables, marquees, testimonials or footers from scratch — import and
+restyle.
+21st.dev
+Premium, modern React components built for
+exactly this kind of restyle-and-ship workﬂow.
+Magic UI
+Animated components and visual eﬀects that
+pair well with a GSAP + Lenis motion layer.
+Simple workflow
+1. Pick a component 2. Install it into the project
+3. Ask AI to restyle it to match the site
+2–3 strong premium components is enough. Too many styles at once makes a site feel
+inconsistent.
+--- page 6/7 ---
+06 Wire up the backend new phase
+Even a "premium" marketing site usually needs somewhere for data to live —
+a contact form, a waitlist, gated content, or client accounts. Add only as much
+backend as the project actually needs.
+Serverless Postgres
+Neon
+A real Postgres database that spins up per
+branch or preview deploy. Pairs naturally with
+Next.js API routes or edge functions for forms,
+waitlists and simple content.
+BaaS
+Supabase
+Postgres, auth, storage and realtime in one.
+The fastest path to client dashboards, e-
+commerce accounts, or anything that needs
+login and ﬁle uploads out of the box.
+Custom service
+Spring Boot
+A dedicated Java backend for projects with
+real business logic — enterprise clients,
+internal tools, or anything a serverless
+function can't comfortably hold.
+Which one, when
+Project Reach for
+Brand / portfolio site with a contact form Neon + a Next.js API route
+E-commerce or client dashboard with login Supabase (auth + storage + DB together)
+Enterprise client with custom business logic Spring Boot behind the Next.js frontend
+Match the backend to the project. Don't wire a Spring Boot service into a one-page brand site
+— that's the same mistake as over-installing tools in phase 02, just further downstream.
+07 Ship & glossary
+The gap between beginner and premium websites is rarely coding skill. It's
+visual direction, consistency, spacing, motion, and typography — held
+together with restraint. The best sites are usually the simplest ones. Practice
+on real projects; that's how your eye improves.
+--- page 7/7 ---
+Quick glossary
+Hero section The main top section visitors see ﬁrst.
+Prompt Instructions you give to AI.
+Component A reusable section, like a form or pricing table.
+Motion library A tool used to create animations — GSAP, Motion.dev, Lenis.
+glTF / GLB The standard ﬁle format for web-ready 3D models exported from Blender.
+BaaS Backend-as-a-service — database, auth and storage bundled, like Supabase.
+Responsive design A website that looks right on phones, tablets and desktops.
+Edge function A small piece of backend code that runs close to the visitor, not in one central server.
+Deploy Publishing your website online.
+Localhost Running the site on your own machine before publishing.
+Need help building yours?
+If you're still stuck, or want a premium website designed
+professionally, I can help — using this exact workﬂow.
+AI websites Modern landing pages
+UI/UX redesigns Animated websites
+Brand websites Portfolio websites
+E-commerce websites
+Email karthikakashsv@gmail.com
+Instagram @genz.webdeveloper
+Build 
+ That's how premium work happens.
+
+===== .zwork\attachments\03cd5ca1-5a33-4dd5-82b2-7afb99f3fa00\scroll_3d_build_prompts_v2.pdf =====
+--- page 1/7 ---
+Scroll Animation & 3D Website — AI Build-Prompt Library
+Page 1
+Scroll Animation & 3D Website
+AI Build-Prompt Library — v2
+A reusable set of copy-paste prompts — one AI-video animation prompt plus seven
+website build prompts (Next.js 14 · GSAP ScrollTrigger · Lenis · React Three Fiber). This
+version adds a new luxury women's dress shop e-commerce prompt (08).
+01 Left → Right Head-Turn Animation
+Type: AI video generation (image-to-video) | Stack: Higgsfield / Kling / Veo
+COPY-PASTE PROMPT
+The creature slowly and smoothly turns its head from left to right at a steady, natural pace. Its eyes follow
+the movement naturally. The body stays mostly still, facing forward. Keep the same cute surprised
+expression, slightly open mouth, visible front teeth, tiny paws, fluffy fur, and soft natural motion. Keep
+the environment, lighting, composition, and character design unchanged. No camera movement, no
+zoom, no cuts, no scene change. The motion should feel gentle, subtle, and realistic, like a curious little
+creature looking around.
+Original video prompt — kept as-is for reference.
+02 KTM Bike — 3D Scroll Website
+Type: Scroll-driven 3D product site | Stack: Next.js 14 · R3F/drei · GSAP ScrollTrigger · Lenis
+COPY-PASTE PROMPT
+Build a premium single-page product website for a KTM-style performance motorcycle using Next.js 14
+(App Router) + TypeScript + Tailwind CSS, with a scroll-driven 3D experience.
+TECH: @react-three/fiber, @react-three/drei, three, gsap + ScrollTrigger, @studio-freight/lenis. Load a
+bike model from /public/models/bike.glb via useGLTF (preload it). Wrap the Canvas in Suspense with a
+loading progress bar (drei useProgress).
+SETUP: Initialise Lenis for smooth scroll and sync it with GSAP ScrollTrigger — on Lenis 'scroll' call
+ScrollTrigger.update, drive lenis.raf from gsap.ticker, set gsap.ticker.lagSmoothing(0). Set DPR to [1,2]
+and clamp on mobile.
+SCROLL DRIVER: The 3D scene is pinned/fixed behind the content. One ScrollTrigger (scrub:1) spanning
+the whole page maps progress 0→1 to: camera dolly + orbit around the bike, bike Y-rotation, and a
+staged 'exploded view' where engine, wheels and bodywork separate then reassemble. Lerp values in
+useFrame so motion never snaps.
+SECTIONS (each a full-viewport scroll beat, text overlaid beside the pinned bike):
+1. HERO — dark stage, bike emerges from shadow, headline 'READY TO RACE'. Orange (#FF6600) accent
+on near-black (#0A0A0A), condensed uppercase display type.
+2. ENGINE — camera pushes in, spec callouts (displacement, power, torque) as animated counters.
+3. CHASSIS & SUSPENSION — rotate to 3/4 rear, trellis frame + WP suspension marked with thin leader
+lines.
+4. WHEELS & BRAKES — low angle, wheels spin, brake-disc callout.
+5. COLORWAY CONFIGURATOR — three swatches (Orange / Black / White) that tween the bike material
+colour; bike does a slow full turn.
+6. SPECS + CTA — full spec sheet, sticky 'Book a Test Ride' button.
+
+--- page 2/7 ---
+Scroll Animation & 3D Website — AI Build-Prompt Library
+Page 2
+FEEL: constant cinematic camera velocity, no hard cuts. Headlines split into spans and reveal
+word-by-word (gsap.from y:110%, stagger 0.05, ease power4.out) per section. Thin scroll-progress
+indicator on the right edge.
+PERFORMANCE: Draco-compress the GLB, lazy-load the Canvas, DPR clamp, and show poster images /
+disable the 3D scene on prefers-reduced-motion. Fully responsive; reduce orbit range and explosion
+distance on mobile. Deliver Scene.tsx, BikeModel.tsx, a useScrollProgress hook, section components and
+a Lenis provider.
+03 Lenis Smooth Scroll + GSAP Products Hero
+Type: Reusable pinned product-swap hero section | Stack: Next.js 14 · GSAP ScrollTrigger · Lenis
+COPY-PASTE PROMPT
+Build a reusable premium 'products animation hero' section in Next.js 14 (App Router) + TypeScript +
+Tailwind, powered by Lenis smooth scroll and GSAP ScrollTrigger. A pinned hero where one hero product
+morphs/swaps through a set of products as the user scrolls, while the page accent colour and background
+transition to match each product.
+TECH: gsap + ScrollTrigger, @studio-freight/lenis, next/image. Pure DOM + transforms (no 3D), but keep
+it 60fps.
+LENIS + GSAP SYNC (client provider): const lenis = new Lenis({ lerp:0.1, smoothWheel:true });
+lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0); then ScrollTrigger.refresh() after mount.
+DATA: array of 4–5 products — { name, image (transparent PNG), accentColor, tagline, price }.
+HERO BEHAVIOUR — one pinned ScrollTrigger (pin:true, scrub:1, end long enough for all products):
+• The current product sits centre, large. As progress crosses each product's segment, the outgoing
+product scales down + rotates slightly + blurs out while the incoming one scales 0.8→1 with a subtle
+rotateY tilt and settles — a clean cross-swap, never a hard cut.
+• Background + accent tween between each product's accentColor (gsap.to on a CSS variable --accent
+that drives background, text and buttons).
+• A big index (01/05) and the product name reveal with a masked word animation on each swap
+(y:110%→0, overflow hidden).
+• Parallax: a soft radial glow and a couple of decorative shapes drift at different scroll speeds behind the
+product.
+• Left column: animated tagline + price + an 'Add to cart' pill that recolours to the active accent.
+EXTRAS: a segmented progress bar (one segment per product) that fills as you pass each; dot navigation
+that lenis.scrollTo each segment. On prefers-reduced-motion disable pin/scrub and stack products
+statically.
+DESIGN: editorial, lots of whitespace, oversized display heading, smooth 0.6–0.9s eases
+(power3/power4.inOut). Deliver as <ProductHero products={...} /> plus a LenisProvider and a
+useScrollColor helper so I can drop it into any project.
+04 Real Estate — 3D Scroll Website
+Type: Cinematic scroll site (image-sequence + optional 3D) | Stack: Next.js 14 · Canvas sequence /
+R3F · GSAP · Lenis
+COPY-PASTE PROMPT
+
+--- page 3/7 ---
+Scroll Animation & 3D Website — AI Build-Prompt Library
+Page 3
+Build a luxury real-estate landing page in Next.js 14 (App Router) + TypeScript + Tailwind with a
+cinematic scroll-driven experience. Use GSAP + ScrollTrigger and Lenis for smooth scroll; use a canvas
+image-sequence scrub for the hero building reveal, with an optional @react-three/fiber path for an
+orbitable 3D building model (make it a toggleable approach).
+HERO — canvas image sequence: preload a numbered frame sequence (/public/seq/tower_0001.webp …
+_0120.webp — a drone fly-in or slow building turn). Draw the current frame to a full-screen <canvas>; a
+ScrollTrigger (pin, scrub:1) maps scroll progress to frame index (Math.round(progress*(total-1))). Overlay
+the project name + tagline that fade as you scroll into the building. Show a loading screen with % while
+frames preload.
+LENIS + GSAP SYNC as standard (lenis 'scroll' → ScrollTrigger.update, gsap.ticker drives raf,
+lagSmoothing(0)).
+SECTIONS AFTER HERO:
+1. STORY — pinned text with word-stagger reveal, muted luxury copy.
+2. AMENITIES — horizontal-scroll gallery: a pinned section that translates a row of cards left as you scroll
+down (x = -(scrollWidth - viewport) * progress), each image parallaxing.
+3. RESIDENCES / FLOOR PLANS — tabs (1BR / 2BR / 3BR / Penthouse) with an animated floor-plan SVG and
+specs (area, beds, baths, price-from).
+4. LOCATION — map with animated pins / neighbourhood highlights revealed on scroll.
+5. GALLERY — masonry with reveal-on-scroll (clip-path / y stagger).
+6. ENQUIRE — sticky enquiry form (name, email, phone, unit type, message) posting to /api/enquiry, plus
+availability status.
+OPTIONAL 3D MODE: swap the hero image-sequence for an R3F <Canvas> with a building GLB the
+camera orbits on scroll (same scroll-progress driver), Suspense + drei Environment for soft lighting.
+FEEL: slow, expensive, continuous camera motion; generous fades; parallax on every image block.
+DESIGN: minimal luxury — warm neutral palette (bone / taupe / charcoal), an elegant serif display for
+headings via next/font, refined sans body, thin gold hairlines, lots of negative space. Fully responsive; on
+mobile drop the sequence to a short autoplay video/poster and disable heavy scrubbing on
+prefers-reduced-motion. Deliver clean components + a useImageSequence hook + LenisProvider.
+05 Web-Slinger — Comic 3D Scroll (Spider-Man style)
+Type: Cinematic curve-follow 3D scroll experience | Stack: Next.js 14 · R3F · postprocessing · GSAP ·
+Lenis
+COPY-PASTE PROMPT
+Build a comic-book-style 3D scroll experience in Next.js 14 (App Router) + TypeScript with
+@react-three/fiber, @react-three/drei, three, gsap + ScrollTrigger, @studio-freight/lenis and
+@react-three/postprocessing — a stylised web-slinging superhero swinging through a city as the user
+scrolls.
+IP NOTE: design an ORIGINAL masked 'web-slinger' hero. Do NOT use Marvel's Spider-Man name, logo,
+spider emblem or red-and-blue suit — use an original colour scheme and silhouette and your
+own/licensed GLB assets, so the site is a legally-safe homage, not a copy.
+SCENE: a stylised low-poly downtown (skyscrapers, rooftops) plus a hero character GLB. Define a
+CatmullRomCurve3 flight path weaving between buildings. One ScrollTrigger (scrub:1) drives progress
+0→1; each frame, place the camera (and the hero slightly ahead) at curve.getPointAt(progress) and
+lookAt a point a little further along the curve so it always faces travel direction — a continuous swinging
+fly-through with no cuts. Lerp in useFrame; add a sinusoidal 'swing' bob (sin(progress*n)) on the vertical
+axis and a slight roll for momentum.
+
+--- page 4/7 ---
+Scroll Animation & 3D Website — AI Build-Prompt Library
+Page 4
+COMIC LOOK (postprocessing): toon / cel-shaded materials (MeshToonMaterial + gradientMap), bold
+outlines (Outline effect or inverted-hull), a halftone dot pass, slight chromatic aberration and a
+high-contrast colour grade.
+SCROLL BEATS (comic 'panels' as HTML over the fixed canvas):
+1. ROOFTOP START — hero crouched on a ledge, big title.
+2. THE DIVE — camera plunges off the building, speed lines, 'WHOOSH'.
+3. SWING SEQUENCE — weaving between towers; web-lines shoot from hand to anchor points (animated
+Line / Trail), 'THWIP!' pops in per swing (gsap scale/rotate burst).
+4. NEAR MISS — a fast dodge around a billboard.
+5. HERO LANDING — three-point pose, camera settles, CTA / section content.
+Lenis + GSAP sync as standard. Speed-line and halftone HTML overlays intensify with scroll velocity (read
+lenis velocity). Onomatopoeia words use a hand-drawn display font (next/font) with bold outline, entering
+on a back/elastic ease.
+PERFORMANCE: Draco-compress GLBs, Suspense + progress loader, DPR clamp, and a static comic-panel
+fallback on prefers-reduced-motion / low-power. Fully responsive (shorten the curve, lighten
+postprocessing on mobile). Deliver Scene.tsx, HeroRig.tsx (curve follower), WebLines.tsx, the
+postprocessing setup, an Onomatopoeia component and a LenisProvider.
+06 Cruise Liner — 3D Scroll Enquiry Site
+Type: Scroll-driven 3D site with lead-capture form | Stack: Next.js 14 · R3F/drei · GSAP · Lenis ·
+react-hook-form
+COPY-PASTE PROMPT
+Build a premium cruise-liner enquiry website in Next.js 14 (App Router) + TypeScript + Tailwind with a
+scroll-driven 3D experience and a lead-capture enquiry flow. Use @react-three/fiber, @react-three/drei,
+three, gsap + ScrollTrigger, @studio-freight/lenis.
+3D SCENE (pinned behind content): a cruise-ship GLB floating on an animated ocean. Use drei Water (or a
+custom water shader / MeshDistortMaterial plane) with slow moving waves, an Environment/Sky for
+sunset light, and a gentle continuous ship bob (sin on position.y + tiny rotation.z). A page-spanning
+ScrollTrigger (scrub:1) maps progress to a cinematic camera move: wide establishing shot → glide along
+the hull → rise to reveal the top decks → pull back for the final CTA. Move the camera along a CatmullRom
+curve with lookAt on the ship so motion is continuous (no cuts). Lerp in useFrame.
+LENIS + GSAP sync standard; Suspense + progress loader for the model.
+SECTIONS (overlaid over the fixed canvas):
+1. HERO — ship on open ocean at golden hour, brand name, tagline 'Sail Beyond the Horizon', scroll cue.
+2. THE SHIP / DECKS — camera glides along; deck & amenity callouts fade in (pools, dining, spa, theatre)
+with word-stagger reveals.
+3. CABIN TYPES — cards (Interior / Ocean View / Balcony / Suite) with price-from, image and 'Enquire'
+buttons that deep-link to the form with the cabin preselected.
+4. ITINERARY — an animated route map (SVG path draws on scroll via strokeDashoffset / DrawSVG)
+showing ports of call; each port pops a small info card.
+5. GALLERY — horizontal-scroll gallery of onboard experiences.
+6. ENQUIRE NOW — the primary form: full name, email, phone, departure date (date picker),
+destination/route (select), guests, cabin type (prefilled), message. Validate with react-hook-form + zod;
+POST to /api/enquiry with success/error toast and a confirmation state.
+FEEL: slow, luxurious, cinematic; constant camera velocity; soft fades; parallax on text. DESIGN: elegant
+premium travel — deep navy (#0B1F3A), warm gold accent (#C9A24B), ivory text, refined serif display +
+
+--- page 5/7 ---
+Scroll Animation & 3D Website — AI Build-Prompt Library
+Page 5
+clean sans body, subtle grain. Fully responsive; on mobile swap the heavy water shader for a lighter
+plane + poster and disable scrubbing on prefers-reduced-motion. Deliver Scene.tsx, Ship.tsx, Ocean.tsx,
+EnquiryForm.tsx (with the API route), the itinerary map component and a LenisProvider.
+07 DRIFT — Streetwear E-Commerce Landing Page
+Type: Ultra-premium animated e-commerce landing page | Stack: Next.js (App Router) · Tailwind CSS ·
+GSAP ScrollTrigger · Lucide React
+COPY-PASTE PROMPT
+Role: You are an expert Frontend Developer and UI/UX Designer specializing in building ultra-premium,
+highly animated e-commerce websites.
+Task: Build a modern, high-end streetwear e-commerce landing page for a brand named "DRIFT".
+TECH STACK
+Framework: Next.js (App Router) with React. Styling: Tailwind CSS (use arbitrary values for precise
+spacing/colors when necessary). Animations: GSAP (GreenSock) and GSAP ScrollTrigger for scroll-based
+animations. Icons: Lucide React. Fonts: a modern, bold sans-serif (like Inter or a geometric sans) for
+primary text.
+DESIGN AESTHETICS & VIBE
+Color Palette: Strictly Monochrome (High contrast Black #111 / "Ink" and Crisp White #FFF), with subtle
+off-white (#F9F9F9 or #F3F3F3) for alternating section backgrounds. No bright accent colors — keep it
+stark and premium. Typography: Massive, bold typography for headers (tight tracking); small, widely
+tracked uppercase text for overlines (e.g., tracking-[0.25em]). Components: Pill-shaped buttons, rounded
+cards (rounded-3xl), and subtle soft drop shadows (shadow-sm, shadow-xl).
+Animations (CRITICAL): Every single section must feature a 3D Flip-In Scroll Animation using GSAP
+ScrollTrigger. As the user scrolls down, elements stagger in by fading from opacity: 0, translating up from
+y: 50, and rotating up from rotateX: -40 with transformPerspective: 1000.
+SECTION-BY-SECTION BREAKDOWN
+1. HERO (h-screen) — Solid white background with a massive hero image/video cutout of a streetwear
+model. Transparent floating navbar: logo "DRIFT" left, center nav links (Home, Shop, Collections, About),
+Search + Cart icons right. Left content: "NEW DROP" pill badge, massive split-line headline "Streetwear.
+Redefined.", short subtext, pill "Explore Collection" button. Right content: floating glassmorphism metric
+cards ("Premium Quality", "Limited Edition", "2.4K+ Loved by Thousands", "Follow Us" social pill). Bottom:
+floating horizontal stats bar (e.g., "50+ Collections").
+2. PRODUCT SHOWCASE (interactive carousel, h-screen) — Split screen 60/40. Left (Stage): large
+centered main product image, smaller blurred queue previews bottom-left, "PREV" / "NEXT" text buttons.
+Bonus: GSAP Flip to animate images from queue to stage. Right (Details): breadcrumbs (HOME >
+SHIRTS), star ratings, massive product title, price, pill size selector, square color swatches, large black
+"ADD TO CART" button.
+3. POPULAR PICKS (horizontal scroll) — Off-white background. "SHOP THE DROP" overline, "Popular Picks"
+title, circular arrow buttons. Horizontal scrolling container (hidden scrollbar) of white rounded product
+cards with image, name, price, circular bag icon button.
+4. NEW ARRIVALS (grid) — Off-white background. "JUST ARRIVED" overline, "New Arrivals" title, 4-column
+grid with a small black "NEW" pill badge on each image.
+5. OUR CATEGORIES (bento grid) — Solid white. One large tall card left (New Arrivals), stacked smaller
+cards right (Outerwear, Activewear, Clearance). Images fill cards with dark gradient overlays and a "View
+Collections" pill on hover.
+6. IDENTITY SHOWCASE (marquee) — Centered header "Express Your Identity With Our Unique Style" +
+description. Infinitely looping auto-scrolling marquee of model images, framed by curved white SVG
+overlays top and bottom. Footer: circular spinning SVG text "SCROLL DOWN" with a down arrow.
+
+--- page 6/7 ---
+Scroll Animation & 3D Website — AI Build-Prompt Library
+Page 6
+7. FEATURED PRODUCT (split layout) — Off-white. Left: large shoe hero image + 4-column thumbnail grid.
+Right: "Nike Air" details — price, star ratings, "To Order" and "In Stock" cards side-by-side, Size/Color
+dropdowns, massive "My Drip Bag" button.
+8. TESTIMONIALS — Solid white. Header "Every Pair Tells A Story Here's Theirs" with stacked avatar group
+and "4.5/5 Trusted By 100+ Customers". 3-column grid of review cards with huge decorative quotation
+mark, review text, avatar/name; middle card staggered down with translate-y.
+9. FOOTER — Solid black (bg-ink) with massive faded white "DRIFT" text spanning the background.
+Foreground: a large white floating card (relative z-10 mx-auto) containing footer links, newsletter signup
+input, and copyright.
+Existing prompt — carried over unchanged from the DRIFT build document.
+08 AURELLE — Women's Dress Shop E-Commerce
+(NEW)
+Type: Luxury scroll-animated dress boutique e-commerce | Stack: Next.js 14 · Tailwind CSS · GSAP
+ScrollTrigger · Lenis · Framer Motion (micro) · Lucide React
+COPY-PASTE PROMPT
+Role: You are an expert Frontend Developer and UI/UX Designer specializing in ultra-premium, highly
+animated fashion e-commerce websites.
+Task: Build a luxury women's dress shop e-commerce landing page for a boutique brand named
+"AURELLE" — selling designer dresses, gowns, ethnic wear (lehengas, sarees) and occasion wear. The site
+must feel like a high-fashion editorial: silky, cinematic, and seamless.
+TECH: Next.js 14 (App Router) + TypeScript + Tailwind CSS, gsap + ScrollTrigger (+ GSAP Flip for image
+transitions), @studio-freight/lenis for smooth scroll, next/image, Lucide React icons. LENIS + GSAP SYNC
+as standard: lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0).
+DESIGN AESTHETICS & VIBE
+Palette: warm ivory (#FAF7F2) base, soft blush (#F3E6E0) alternating sections, deep espresso text
+(#1C1512), and a single champagne-gold accent (#C9A24B) for hairlines, prices and CTAs. Typography:
+elegant high-contrast serif display (e.g., Playfair Display / Fraunces via next/font) for headlines, refined
+sans (Inter) for body; small widely tracked uppercase overlines (tracking-[0.3em]). Components: pill CTAs,
+tall 3:4 portrait product cards (rounded-2xl), thin gold hairline dividers, generous negative space.
+Animations (CRITICAL): every section reveals with a soft 'silk' entrance — elements fade from opacity 0,
+rise from y: 60, and un-skew from skewY: 4 with a 1.1s power4.out ease, staggered 0.08. Headlines split
+into masked lines that slide up (y: 110% → 0, overflow hidden). All product images have a slow Ken-Burns
+parallax (scale 1.15 → 1 on scroll) inside overflow-hidden frames. No hard cuts anywhere — every
+transition must feel continuous.
+SECTION-BY-SECTION BREAKDOWN
+1. HERO (h-screen, pinned) — Full-bleed editorial photo of a model in a flowing gown. Transparent
+navbar: serif logo "AURELLE" left, nav links (New In, Dresses, Occasion, Ethnic, About), Search / Wishlist /
+Cart icons right with a cart-count badge. Center-left: overline "SPRING · SUMMER '26", massive two-line
+serif headline "Dressed in / Poetry.", short subtext, two CTAs — gold pill "Shop the Collection" + ghost
+"Watch the Film". As you scroll, the hero image scales down into a rounded-3xl frame while the headline
+drifts up at a slower parallax speed (scrub).
+2. DRESS SHOWCASE (pinned scroll carousel, h-screen) — One pinned ScrollTrigger where the featured
+dress swaps through 4 looks (Evening Gown / Cocktail Dress / Bridal Lehenga / Summer Midi) as the user
+scrolls: outgoing dress blurs + drifts left, incoming settles from scale 0.85 with a subtle rotateY — a clean
+
+--- page 7/7 ---
+Scroll Animation & 3D Website — AI Build-Prompt Library
+Page 7
+cross-swap (never a cut). Background tint tweens per dress via a CSS variable --accent. Right column: big
+index (01/04), dress name masked-line reveal, fabric note, price in gold, size pills (XS–XXL), colour
+swatches, black "Add to Bag" pill. Segmented progress bar under the index.
+3. NEW ARRIVALS (grid) — Blush background. Overline "JUST IN", serif title "New Arrivals". 4-column grid
+(2 on mobile) of 3:4 portrait cards: image with hover zoom + quick 'second image' crossfade, small gold
+"NEW" pill, name, price, heart wishlist icon, and a slide-up "Add to Bag" bar on hover. Cards stagger in
+with the silk entrance.
+4. SHOP BY OCCASION (bento grid) — Ivory background. Serif title "Shop by Occasion". Bento layout: one
+tall card left (Wedding & Bridal), stacked right (Evening, Casual Day, Festive Ethnic). Full-bleed imagery,
+soft dark gradient at the bottom, white serif labels, and a "Explore" gold pill sliding in on hover.
+5. FABRIC & CRAFT (split parallax) — A pinned split section: left, a slow macro Ken-Burns video/image of
+silk, embroidery and zari detail; right, word-stagger copy about hand-finished craft with three animated
+counters (e.g., "120+ hrs handwork", "100% pure fabrics", "Made to Measure").
+6. LOOKBOOK (horizontal scroll) — A pinned section translating a row of tall editorial images left as you
+scroll down (x = -(scrollWidth - viewport) * progress), each image parallaxing at a slightly different speed,
+with a thin gold progress line beneath.
+7. TESTIMONIALS — Ivory. Serif header "Loved by Every Silhouette", stacked customer avatars + "4.9/5 ·
+500+ Happy Customers". 3-column review cards with a large decorative serif quotation mark; middle
+card offset down with translate-y.
+8. INSTAGRAM STRIP (marquee) — Infinite auto-scrolling marquee of square feed images with an
+"@aurelle.official — Follow Us" center pill; marquee speed eases with lenis scroll velocity.
+9. NEWSLETTER + FOOTER — Espresso-dark footer with massive faded serif "AURELLE" spanning the
+background. Foreground floating ivory card: newsletter input ("Get 10% off your first dress"), link columns
+(Shop, Help, Size Guide, Shipping & Returns, Contact / WhatsApp), payment icons (UPI, Visa, Mastercard,
+Razorpay), and copyright.
+E-COMMERCE BEHAVIOUR: client-side cart state (context) with a slide-in cart drawer (backdrop blur, item
+list, qty steppers, subtotal, gold "Checkout" pill wired for Razorpay later); wishlist toggle persisted in
+memory; size-guide modal; product data from a typed products.ts array { name, images[], price, mrp,
+fabric, occasion, sizes[], colors[] } so real inventory can be dropped in.
+PERFORMANCE & A11Y: next/image with priority hero, lazy sections, will-change only during tweens,
+prefers-reduced-motion disables pin/scrub and shows static layouts, semantic landmarks + alt text, fully
+responsive (carousel becomes swipe cards and lookbook becomes native horizontal scroll on mobile).
+Deliver page.tsx, section components, CartDrawer.tsx, a LenisProvider and a useSilkReveal hook.
+NEW — added in this version of the library.
+
+

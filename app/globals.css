@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  --milk: #ffffff; /* cards on bone only — never the page base */
+  --bone: #fdfbf7; /* the true page base */
+  --buttermilk: #f7f3ea; /* alternating section background */
+  --ink: #1a1410; /* deep earthen brown-black — never #000 */
+  --muted: #7a6f63; /* secondary copy */
+  --kesar: #e08a2e; /* saffron accent — ≤5% of any viewport */
+  --peacock: #14304a; /* deep indigo secondary accent */
+  --motif: #e8dfd0; /* pattern linework — warm, not grey */
+  --hairline: #ede6da; /* 1px borders on bone */
+  --fresh: #4a7c59; /* "Fresh today" / in-stock dots only */
+}
+
+@theme inline {
+  /* Fonts (self-hosted via @fontsource, loaded in layout.tsx) */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Brand palette → Tailwind color utilities (bg-bone, text-ink, etc.) */
+  --color-milk: var(--milk);
+  --color-bone: var(--bone);
+  --color-buttermilk: var(--buttermilk);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-kesar: var(--kesar);
+  --color-peacock: var(--peacock);
+  --color-motif: var(--motif);
+  --color-hairline: var(--hairline);
+  --color-fresh: var(--fresh);
+
+  /* Layout */
+  --spacing-site: 1440px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    --font-display: "Fraunces";
+    --font-body: "Inter";
+    --font-mono: "JetBrains Mono";
+  }
+
+  body {
+    background-color: var(--bone);
+    color: var(--ink);
+    font-family: var(--font-body), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--kesar);
+    color: var(--milk);
+  }
+}
+
+@layer components {
+  /* Display headline — warm high-contrast serif (Fraunces, self-hosted) */
+  .display {
+    font-family: var(--font-display), Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Mono overline: uppercase, tiny, wide-tracked */
+  .overline {
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Kantha-style running-stitch divider (1px dashed, warm) */
+  .kantha-rule {
+    border: 0;
+    border-top: 1px dashed var(--motif);
+  }
+
+  /* Card: rounded-3xl, hairline border, shadow-sm only */
+  .card {
+    border-radius: var(--radius-3xl);
+    border: 1px solid var(--hairline);
+    background-color: var(--milk);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+}

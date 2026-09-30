@@ -9,6 +9,8 @@ import PressStrip from "@/components/sections/PressStrip";
 import ProductSwapShowcase from "@/components/sections/ProductSwapShowcase";
 import CategoryBento from "@/components/sections/CategoryBento";
 import Bestsellers from "@/components/sections/Bestsellers";
+import ComboRail from "@/components/sections/ComboRail";
+import StatsBand from "@/components/sections/StatsBand";
 import ThePour from "@/components/sections/ThePour";
 import FarmJourney from "@/components/sections/FarmJourney";
 import BilonaGhee from "@/components/sections/BilonaGhee";
@@ -39,6 +41,7 @@ export default function Home() {
         <Promise />
         <CategoryBento />
         <Bestsellers />
+        <ComboRail />
         <ThePour />
         <FarmJourney />
         <BilonaGhee />
@@ -47,6 +50,7 @@ export default function Home() {
         <Gifting />
         <WhyGlass />
         <Testimonials />
+        <StatsBand />
         <Faq />
       </main>
       <Footer />

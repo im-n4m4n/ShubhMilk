@@ -48,7 +48,7 @@ export default function MaskedLines({
     <h2 ref={root} className={className}>
       {lines.map((l, i) => (
         <span key={i} className={`block overflow-hidden ${lineClassName}`}>
-          <span data-line-inner className="block will-change-transform">
+          <span data-line-inner className="block">
             {l}
           </span>
         </span>

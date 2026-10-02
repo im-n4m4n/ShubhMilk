@@ -36,8 +36,11 @@
 }
 
 @layer base {
+  /* Smooth scrolling is a desktop nicety. On phones it fights the native
+     scroll and, combined with pinned ScrollTrigger sections, is a common
+     source of jank. */
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     --font-display: "Fraunces";
     --font-body: "Inter";
     --font-mono: "JetBrains Mono";

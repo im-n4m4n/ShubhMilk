@@ -173,13 +173,13 @@ export default function Hero() {
     <section ref={root} className="relative min-h-screen bg-bone">
       <div className="mx-auto max-w-site px-6 pb-10 pt-32 lg:px-12 lg:pt-36">
         <div className="relative overflow-hidden rounded-3xl">
-          <div ref={imgWrap} className="relative h-[86vh] min-h-[560px] w-full will-change-transform">
+          <div ref={imgWrap} className="relative h-[70vh] min-h-[460px] w-full lg:h-[86vh] lg:min-h-[560px]">
             {/* slide stack — crossfade + slow ken-burns on the active slide */}
             {slides.map((sl, i) => (
               <div
                 key={sl.photo}
                 aria-hidden={i !== active}
-                className="absolute inset-0 transition-opacity duration-[1400ms] ease-out"
+                className="absolute inset-0 transition-opacity duration-700 ease-out lg:duration-[1400ms]"
                 style={{ opacity: i === active ? 1 : 0 }}
               >
                 <Image
@@ -189,7 +189,7 @@ export default function Hero() {
                   priority={i === 0}
                   sizes="100vw"
                   quality={70}
-                  className="object-cover transition-transform duration-[9000ms] ease-out"
+                  className="object-cover transition-opacity duration-700 ease-out lg:transition-[transform,opacity] lg:duration-[9000ms]"
                   style={{ transform: i === active ? "scale(1.06)" : "scale(1)" }}
                 />
               </div>
@@ -220,12 +220,12 @@ export default function Hero() {
                 <div className="mt-6 overflow-hidden">
                   <h1 className="display text-[clamp(2.75rem,7vw,6.5rem)] font-medium leading-[1.02] text-[#FDFBF7]">
                     <span className="block overflow-hidden">
-                      <span data-line-inner className="block will-change-transform">
+                      <span data-line-inner className="block">
                         {s.line1}
                       </span>
                     </span>
                     <span className="block overflow-hidden">
-                      <span data-line-inner className="block will-change-transform">
+                      <span data-line-inner className="block">
                         {s.line2}
                       </span>
                     </span>
@@ -245,7 +245,7 @@ export default function Hero() {
                     </button>
                   </Link>
                   <Link data-hero-cta href={s.ghost.href} aria-label={s.ghost.label}>
-                    <button className="rounded-full border border-[#EDE6DA]/50 bg-[#1A1410]/20 px-8 py-4 text-[15px] font-medium text-[#FDFBF7] backdrop-blur-sm transition-colors duration-200 hover:bg-[#1A1410]/40">
+                    <button className="rounded-full border border-[#EDE6DA]/50 bg-[#1A1410]/30 px-8 py-4 text-[15px] font-medium text-[#FDFBF7] transition-colors duration-200 hover:bg-[#1A1410]/50">
                       {s.ghost.label}
                     </button>
                   </Link>
@@ -278,7 +278,7 @@ export default function Hero() {
 
             {/* scroll cue */}
             <div className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 lg:block">
-              <div className="flex items-center gap-2 rounded-full border border-[#EDE6DA]/30 bg-[#1A1410]/25 px-4 py-2 backdrop-blur-sm">
+              <div className="flex items-center gap-2 rounded-full border border-[#EDE6DA]/30 bg-[#1A1410]/35 px-4 py-2">
                 <ArrowDown className="h-3.5 w-3.5 animate-bounce text-[#EDE6DA]" strokeWidth={1.5} />
                 <span className="font-mono text-[10px] tracking-[0.3em] text-[#EDE6DA]">SCROLL</span>
               </div>
@@ -315,7 +315,7 @@ export default function Hero() {
 
 function GlassCard({ label, sub }: { label: string; sub: string }) {
   return (
-    <div className="rounded-2xl border border-[#EDE6DA]/25 bg-[#FDFBF7]/10 px-5 py-3.5 backdrop-blur-md">
+    <div className="rounded-2xl border border-[#EDE6DA]/25 bg-[#FDFBF7]/15 px-5 py-3.5 lg:backdrop-blur-md">
       <p className="font-mono text-[10px] tracking-[0.25em] text-[#F3C888]">{label}</p>
       <p className="mt-1 text-xs text-[#EDE6DA]">{sub}</p>
     </div>

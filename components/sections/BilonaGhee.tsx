@@ -71,7 +71,7 @@ export default function BilonaGhee() {
           {/* Macro photography with Ken Burns */}
           <div className="card overflow-hidden">
             <div className="relative h-[460px] w-full">
-              <div ref={media} className="absolute inset-0 will-change-transform">
+              <div ref={media} className="absolute inset-0">
                 <Image
                   src="/images/ghee-macro.jpeg"
                   alt="Golden bilona ghee being hand-churned, the Vedic way"

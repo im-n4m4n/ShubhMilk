@@ -24,7 +24,7 @@ export default function StickyCTA() {
   return (
     <>
       {/* ── Mobile: full-width bar, always visible ─────────────────────────── */}
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-bone/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-bone pb-[env(safe-area-inset-bottom)] lg:hidden">
         <div className="flex items-stretch gap-2 px-3 py-2.5">
           <a
             href={order}
@@ -57,7 +57,7 @@ export default function StickyCTA() {
       </div>
 
       {/* ── Desktop: floating pair, bottom-right ───────────────────────────── */}
-      <div className="pointer-events-none fixed bottom-6 right-6 z-30 hidden flex-col items-end gap-3 lg:flex">
+      <div className="pointer-events-none fixed bottom-6 right-6 z-40 hidden flex-col items-end gap-3 lg:flex">
         <a
           href={call}
           aria-label={t.sticky.ariaLabelCall}

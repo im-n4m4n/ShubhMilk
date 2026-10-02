@@ -41,7 +41,7 @@ export default function Promise() {
         <SectionHeading overline="THE PROMISE" title="Why homes switch to Shubh" />
         <FlipIn className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4" stagger={0.1}>
           {promises.map(({ Icon, tag, title, copy }) => (
-            <article key={tag} data-flip className="card p-8 will-change-transform">
+            <article key={tag} data-flip className="card p-8">
               <Icon className="h-6 w-6 text-kesar" strokeWidth={1.5} />
               <p className="mt-6 font-mono text-[11px] tracking-[0.25em] text-muted">
                 {tag}

@@ -25,7 +25,7 @@ export default function MobileStickyBar({ productId }: { productId: string }) {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-hairline bg-bone/95 px-5 py-3 backdrop-blur-sm transition-transform duration-300 lg:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-hairline bg-bone px-5 py-3 transition-transform duration-300 lg:hidden ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >

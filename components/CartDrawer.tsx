@@ -53,7 +53,7 @@ export default function CartDrawer() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={closeDrawer}
-            className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-ink/45"
           />
 
           {/* Panel */}

@@ -1,5 +1,6 @@
 import CartDrawer from "@/components/CartDrawer";
 import FloatingWhatsApp from "@/components/sections/FloatingWhatsApp";
+import StickyCTA from "@/components/StickyCTA";
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
 import TrustMarquee from "@/components/sections/TrustMarquee";
@@ -55,6 +56,7 @@ export default function Home() {
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <StickyCTA />
       <CartDrawer />
     </>
   );

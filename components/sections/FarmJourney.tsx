@@ -3,17 +3,74 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Warli from "@/components/patterns/Warli";
+import Image from "next/image";
 import Kolam from "@/components/patterns/Kolam";
 import { Overline } from "@/components/ui";
 
+/**
+ * The six steps, each with its own photograph. `from`/`to` remain as the soft
+ * gradient that sits behind the photo while it loads, so a card never flashes
+ * an empty white box.
+ *
+ * alt text describes what SHOULD be in the picture. If you swap these for your
+ * own photographs, update the alt to match what is actually shown — mismatched
+ * alt text is worse than none for screen readers and for search.
+ */
 const steps = [
-  { n: "01", title: "Farm", copy: "Gir cows graze on open pasture. No feedlots, no shortcuts.", from: "#F4EDDF", to: "#E2D5BC" },
-  { n: "02", title: "Milking", copy: "Hand-milked at 4:30 AM into stainless steel, never plastic.", from: "#F5EEE1", to: "#DFD2BB" },
-  { n: "03", title: "Chilling", copy: "From 37°C to 4°C within ninety minutes, on site.", from: "#F2EDE2", to: "#D9DFD2" },
-  { n: "04", title: "Testing", copy: "Every batch tested for adulterants before it leaves the gate.", from: "#F4EFE3", to: "#E0DCC8" },
-  { n: "05", title: "Glass Bottling", copy: "Filled, capped and sealed in sterilised returnable glass.", from: "#F6F0E4", to: "#E4DAC3" },
-  { n: "06", title: "Your Doorstep", copy: "Delivered cold, before the city wakes. Bottles collected.", from: "#F7F1E6", to: "#E8DEC8" },
+  {
+    n: "01",
+    title: "Farm",
+    copy: "Gir cows graze on open pasture. No feedlots, no shortcuts.",
+    photo: "/images/farm/farm-step-01-farm.jpeg",
+    alt: "An indigenous Gir cow grazing on open pasture at sunrise, with a village hut in the misty background",
+    from: "#F4EDDF",
+    to: "#E2D5BC",
+  },
+  {
+    n: "02",
+    title: "Milking",
+    copy: "Hand-milked at 4:30 AM into stainless steel, never plastic.",
+    photo: "/images/farm/farm-step-02-milking.jpeg",
+    alt: "A dairy farmer hand-milking a cow into a stainless steel pail inside a simple cowshed",
+    from: "#F5EEE1",
+    to: "#DFD2BB",
+  },
+  {
+    n: "03",
+    title: "Chilling",
+    copy: "From 37°C to 4°C within ninety minutes, on site.",
+    photo: "/images/farm/farm-step-03-chilling.jpeg",
+    alt: "Two polished stainless steel milk cans standing in a clean, bare dairy chilling room",
+    from: "#F2EDE2",
+    to: "#D9DFD2",
+  },
+  {
+    n: "04",
+    title: "Testing",
+    copy: "Every batch tested for adulterants before it leaves the gate.",
+    photo: "/images/farm/farm-step-04-testing.jpeg",
+    alt: "A lactometer testing a sample of milk in a glass beaker, beside a bottle of milk",
+    from: "#F4EFE3",
+    to: "#E0DCC8",
+  },
+  {
+    n: "05",
+    title: "Glass Bottling",
+    copy: "Filled, capped and sealed in sterilised returnable glass.",
+    photo: "/images/farm/farm-step-05-bottling.jpeg",
+    alt: "Fresh milk being poured into a clear glass bottle, with clean empty bottles waiting beside it",
+    from: "#F6F0E4",
+    to: "#E4DAC3",
+  },
+  {
+    n: "06",
+    title: "Your Doorstep",
+    copy: "Delivered cold, before the city wakes. Bottles collected.",
+    photo: "/images/farm/farm-step-06-doorstep.jpeg",
+    alt: "A crate of fresh milk bottles waiting on the doorstep of a home at first light",
+    from: "#F7F1E6",
+    to: "#E8DEC8",
+  },
 ];
 
 /**
@@ -78,17 +135,26 @@ export default function FarmJourney() {
                     className="relative h-[46vh] w-full"
                     style={{ background: `linear-gradient(160deg, ${s.from} 0%, ${s.to} 100%)` }}
                   >
-                    <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full" aria-hidden>
-                      {/* madhubani double border */}
-                      <g fill="none" stroke="#C9B79A" strokeWidth="2">
-                        <rect x="10" y="10" width="380" height="280" strokeOpacity="0.8" />
-                        <rect x="18" y="18" width="364" height="264" strokeWidth="1.2" strokeOpacity="0.7" />
+                    <Image
+                      src={s.photo}
+                      alt={s.alt}
+                      fill
+                      quality={70}
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 78vw"
+                      className="object-cover"
+                    />
+                    {/* madhubani double border, laid over the photograph as a frame */}
+                    <svg viewBox="0 0 400 300" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
+                      <g fill="none" stroke="#F6F0E4" strokeWidth="2" opacity="0.5">
+                        <rect x="10" y="10" width="380" height="280" />
+                        <rect x="18" y="18" width="364" height="264" strokeWidth="1.2" opacity="0.7" />
                       </g>
-                      <StepGlyph n={s.n} />
                     </svg>
-
-                    {/* warli figure at the base */}
-                    <Warli className="absolute bottom-2 left-4 h-16 w-40 opacity-[0.55]" />
+                    {/* soft base wash so the card edge stays calm against the grid */}
+                    <div
+                      aria-hidden
+                      className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-ink/25 to-transparent"
+                    />
                   </div>
                   <div className="p-6">
                     <p className="font-mono text-[11px] tracking-[0.25em] text-kesar">{s.n}</p>
@@ -110,63 +176,5 @@ export default function FarmJourney() {
         </div>
       </div>
     </section>
-  );
-}
-
-/** Simple duotone illustration per step — abstract, warm, drawn not clipped. */
-function StepGlyph({ n }: { n: string }) {
-  const stroke = "#B9A582";
-  const common = { fill: "none", stroke, strokeWidth: 2.5, strokeLinecap: "round" as const };
-  return (
-    <g {...common}>
-      {n === "01" && (
-        <>
-          <path d="M60 220 L140 130 L220 220 Z" />
-          <path d="M120 220 L120 165 L165 165 L165 220" />
-          <path d="M250 200 C270 175 300 175 320 200 C310 210 260 210 250 200 Z" />
-          <path d="M240 205 C230 200 225 190 228 180 M330 205 C342 200 348 190 344 180" />
-        </>
-      )}
-      {n === "02" && (
-        <>
-          <path d="M110 210 L150 210 L150 155 L110 155 Z" />
-          <path d="M130 155 L130 120" />
-          <circle cx="250" cy="150" r="22" />
-          <path d="M250 172 L250 215 M230 215 L270 215" />
-        </>
-      )}
-      {n === "03" && (
-        <>
-          <path d="M100 200 L100 120 L180 120 L180 200 Z" />
-          <path d="M120 140 L160 140 M120 160 L160 160 M120 180 L160 180" strokeWidth="2" />
-          <path d="M220 200 C240 160 280 160 300 200" />
-          <path d="M260 130 L260 160" />
-          <circle cx="260" cy="176" r="8" />
-        </>
-      )}
-      {n === "04" && (
-        <>
-          <path d="M150 110 L150 140 L130 190 C125 205 140 215 155 215 L245 215 C260 215 275 205 270 190 L250 140 L250 110 Z" />
-          <path d="M160 175 L240 175" strokeWidth="2" />
-          <path d="M190 130 L190 100 M210 130 L230 96 M230 130 L250 100" strokeWidth="2" />
-        </>
-      )}
-      {n === "05" && (
-        <>
-          <path d="M120 120 L120 90 L280 90 L280 120" />
-          <path d="M140 120 L140 215 L260 215 L260 120" />
-          <path d="M170 75 L230 75" />
-          <path d="M120 165 L280 165" strokeWidth="2" />
-        </>
-      )}
-      {n === "06" && (
-        <>
-          <path d="M80 190 L80 110 L200 110 L200 190 Z" />
-          <path d="M200 130 L260 130 L260 190 L200 190" />
-          <circle cx="230" cy="196" r="10" />
-          <path d="M280 150 L320 150 L320 190" />
-        </>
-      )}
-    </g>
   );
 }

@@ -59,24 +59,27 @@ function Bottle({ progressRef }: { progressRef: MutableRefObject<number> }) {
     <group ref={group} position={[-0.62, 0.28, 0]}>
       {/* glass body */}
       <mesh>
-        <latheGeometry args={[profile, 48]} />
-        <meshPhysicalMaterial
+        <latheGeometry args={[profile, 28]} />
+        {/* meshStandardMaterial with transparency, NOT meshPhysicalMaterial:
+            `transmission` performs real refraction, which is one of the most
+            expensive things you can ask a GPU to do per pixel. At bottle size
+            the visual difference is negligible; the cost is not. */}
+        <meshStandardMaterial
           color={GLASS}
           transparent
-          opacity={0.45}
-          roughness={0.06}
-          transmission={0.85}
-          thickness={0.6}
+          opacity={0.42}
+          roughness={0.12}
+          metalness={0.05}
         />
       </mesh>
       {/* milk inside */}
       <mesh ref={milk} position={[0, 0.855, 0]}>
-        <cylinderGeometry args={[0.47, 0.47, 1.55, 40]} />
+        <cylinderGeometry args={[0.47, 0.47, 1.55, 24]} />
         <meshStandardMaterial color={MILK} roughness={0.35} />
       </mesh>
       {/* cap */}
       <mesh position={[0, 2.47, 0]}>
-        <cylinderGeometry args={[0.24, 0.24, 0.1, 32]} />
+        <cylinderGeometry args={[0.24, 0.24, 0.1, 20]} />
         <meshStandardMaterial color="#D9C9A8" roughness={0.5} />
       </mesh>
     </group>
@@ -112,23 +115,22 @@ function PourGlass({ progressRef }: { progressRef: MutableRefObject<number> }) {
   return (
     <group position={[0.66, 0, 0]}>
       <mesh>
-        <latheGeometry args={[profile, 40]} />
-        <meshPhysicalMaterial
+        <latheGeometry args={[profile, 24]} />
+        <meshStandardMaterial
           color={GLASS}
           transparent
-          opacity={0.4}
-          roughness={0.06}
-          transmission={0.85}
-          thickness={0.4}
+          opacity={0.38}
+          roughness={0.12}
+          metalness={0.05}
         />
       </mesh>
       <mesh ref={milk} position={[0, 0.06, 0]}>
-        <cylinderGeometry args={[0.33, 0.33, 0.78, 36]} />
+        <cylinderGeometry args={[0.33, 0.33, 0.78, 22]} />
         <meshStandardMaterial color={MILK} roughness={0.35} />
       </mesh>
       {/* falling stream */}
       <mesh ref={stream} position={[0, 0.1, 0]}>
-        <cylinderGeometry args={[0.045, 0.045, 1.9, 16]} />
+        <cylinderGeometry args={[0.045, 0.045, 1.9, 10]} />
         <meshStandardMaterial color={MILK} roughness={0.3} transparent opacity={0} />
       </mesh>
     </group>
@@ -149,7 +151,7 @@ function CameraRig({ progressRef }: { progressRef: MutableRefObject<number> }) {
 function Ground() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]}>
-      <circleGeometry args={[6, 48]} />
+      <circleGeometry args={[6, 32]} />
       <meshBasicMaterial color="#F1EADD" transparent opacity={0.55} />
     </mesh>
   );
@@ -162,8 +164,11 @@ export default function BottleScene({
 }) {
   return (
     <Canvas
-      dpr={[1, 1.5]}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      /* dpr capped at 1.25 and antialias off: at this size the difference is
+         imperceptible, but MSAA on a full-viewport canvas is a real cost on
+         mid-range laptops. */
+      dpr={[1, 1.25]}
+      gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 1.7, 5.6], fov: 36 }}
       style={{ background: "transparent" }}
     >

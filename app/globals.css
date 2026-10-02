@@ -57,6 +57,46 @@
   }
 }
 
+/* ───────────────────────────────────────────────────────────────────────────
+   ACCESSIBILITY & PERFORMANCE
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Honour the OS "reduce motion" setting. Previously the site had NO
+   prefers-reduced-motion handling at all, which is both an accessibility
+   failure and, for motion-sensitive users, actively unpleasant. Individual
+   components already check this in JS; this is the CSS safety net that also
+   catches the pure-CSS animations (the rotating mandala, spinners, etc.). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* On touch devices, don't let a horizontal swipe inside the page trigger the
+   browser's back-gesture mid-scroll, and keep momentum scrolling smooth. */
+@media (hover: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* The sticky order bar overlaps the very bottom of the page on mobile; make
+   sure in-page anchors land clear of the fixed header too. */
+@media (max-width: 1023px) {
+  :target {
+    scroll-margin-bottom: 84px;
+  }
+}
+
 @layer components {
   /* Display headline — warm high-contrast serif (Fraunces, self-hosted) */
   .display {

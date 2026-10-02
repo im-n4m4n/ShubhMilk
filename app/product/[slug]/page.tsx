@@ -30,7 +30,7 @@ export default async function ProductPage({
             <div className="grid gap-16 lg:grid-cols-12">
               <div className="lg:col-span-6">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border shadow-sm" style={{ borderColor: "var(--hairline)" }}>
-                  <KenBurns className="absolute inset-0">
+                  <KenBurns className="relative h-full w-full">
                     <Image
                       src={product.photo}
                       alt={product.name}

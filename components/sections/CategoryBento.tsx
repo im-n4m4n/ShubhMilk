@@ -28,7 +28,7 @@ export default function CategoryBento() {
                 className={`card group block overflow-hidden ${isFirst ? "lg:row-span-2" : ""}`}
               >
                 <div className={`relative ${isFirst ? "h-[560px]" : "h-[240px]"}`}>
-                  <KenBurns className="absolute inset-0">
+                  <KenBurns className="relative h-full w-full">
                     <Image
                       src={c.photo}
                       alt={c.label}

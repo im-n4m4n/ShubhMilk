@@ -4,15 +4,21 @@
  * promise pillars. Deterministic pseudo-random placement (no hydration drift).
  */
 export default function Buti({ className = "" }: { className?: string }) {
-  /* Deterministic scatter: golden-angle spiral, so SSR and client agree. */
+  /* Deterministic scatter: golden-angle spiral.
+   * The coordinates are ROUNDED on purpose. Math.cos/sin are not guaranteed to
+   * return bit-identical results in every JS engine, so the un-rounded values
+   * could serialise as e.g. 26.35612277238292 on the server and
+   * 26.356122772382918 in the browser — which React reports as a hydration
+   * mismatch. Rounding to 4dp makes both sides agree exactly. */
+  const round = (n: number): number => Math.round(n * 10000) / 10000;
   const seed = Array.from({ length: 34 }, (_, i) => {
     const golden = 137.508;
     const a = (i * golden * Math.PI) / 180;
     const r = Math.sqrt(i / 34);
     return {
-      x: 50 + Math.cos(a) * r * 46,
-      y: 50 + Math.sin(a) * r * 46,
-      s: 0.7 + ((i * 37) % 60) / 100,
+      x: round(50 + Math.cos(a) * r * 46),
+      y: round(50 + Math.sin(a) * r * 46),
+      s: round(0.7 + ((i * 37) % 60) / 100),
       rot: (i * 53) % 360,
     };
   });

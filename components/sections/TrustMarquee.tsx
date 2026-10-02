@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { claims, compliance } from "@/lib/businessConfig";
 
 /**
  * TrustMarquee — infinite horizontal scroll of trust claims, separated by
@@ -28,14 +29,16 @@ export default function TrustMarquee() {
     };
   }, []);
 
+  /* Claims come from lib/businessConfig.ts — never invent a number here. */
+  const licence = compliance.fssai.startsWith("[");
   const items = [
-    "FSSAI CERTIFIED",
+    licence ? compliance.fssai : `FSSAI ${compliance.fssai}`,
     "A2 CERTIFIED",
     "LAB TESTED DAILY",
     "GLASS BOTTLED",
     "NO PRESERVATIVES",
     "FARM TRACEABLE",
-    "12,000+ HOMES",
+    `${claims.homesServed} HOMES`,
   ];
 
   const row = (key: string) => (

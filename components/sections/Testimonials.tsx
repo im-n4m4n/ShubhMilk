@@ -1,28 +1,32 @@
 import { User } from "lucide-react";
 import { SectionHeading } from "@/components/ui";
 import SilkReveal from "@/components/motion/SilkReveal";
+import { claims } from "@/lib/businessConfig";
 
+/**
+ * ⚠ These were invented demo reviews for a made-up Bengaluru address. They
+ * are placeholders until real Varanasi customers agree, in writing, to be
+ * quoted — see TODO.md. Publishing fabricated reviews is misleading and can
+ * cost you the Google Business listing.
+ */
 const testimonials = [
   {
-    quote:
-      "The bottle lands before the newspaper does. Chai has never tasted this honest — my mother asked which farm we had stolen it from.",
-    name: "Meera Krishnan",
-    area: "Indiranagar, Bengaluru",
-    since: "SUBSCRIBER SINCE 2021",
+    quote: "[TESTIMONIAL_1_QUOTE]",
+    name: "[TESTIMONIAL_1_NAME]",
+    area: "[TESTIMONIAL_1_AREA]",
+    since: "[TESTIMONIAL_1_SINCE]",
   },
   {
-    quote:
-      "We moved the whole family to the 1L plan. Curd sets overnight in the jar, and the ghee smells exactly like my grandmother's kitchen.",
-    name: "Arjun & Divya Rao",
-    area: "Jayanagar, Bengaluru",
-    since: "SUBSCRIBER SINCE 2022",
+    quote: "[TESTIMONIAL_2_QUOTE]",
+    name: "[TESTIMONIAL_2_NAME]",
+    area: "[TESTIMONIAL_2_AREA]",
+    since: "[TESTIMONIAL_2_SINCE]",
   },
   {
-    quote:
-      "Pause it when we travel, resume when we're back. Empty bottles go out with the morning delivery like clockwork. Easiest good habit we own.",
-    name: "Farah Siddiqui",
-    area: "Koramangala, Bengaluru",
-    since: "SUBSCRIBER SINCE 2023",
+    quote: "[TESTIMONIAL_3_QUOTE]",
+    name: "[TESTIMONIAL_3_NAME]",
+    area: "[TESTIMONIAL_3_AREA]",
+    since: "[TESTIMONIAL_3_SINCE]",
   },
 ];
 
@@ -32,7 +36,7 @@ export default function Testimonials() {
       <div className="mx-auto max-w-site px-6 py-24 lg:px-12">
         <SectionHeading
           overline="FROM THE NEIGHBOURHOOD"
-          title="12,000 homes, one morning ritual"
+          title="One morning ritual, across Varanasi"
         />
 
         <SilkReveal className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -74,7 +78,9 @@ export default function Testimonials() {
               </span>
             ))}
           </div>
-          <p className="font-mono text-xs text-muted">4.8/5 · 3,200+ verified reviews</p>
+          <p className="font-mono text-xs text-muted">
+            {claims.rating}/5 · {claims.reviewCount} verified reviews
+          </p>
         </div>
       </div>
     </section>

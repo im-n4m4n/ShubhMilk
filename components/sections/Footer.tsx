@@ -1,4 +1,5 @@
 import NewsletterForm from "@/components/NewsletterForm";
+import { compliance, contact, links, serviceAreas } from "@/lib/businessConfig";
 
 const columns: { title: string; links: string[] }[] = [
   {
@@ -64,22 +65,33 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Compliance + contact */}
+        {/* Compliance + contact — every value comes from lib/businessConfig.ts */}
         <div className="mt-16 space-y-2">
           <p className="font-mono text-xs text-bone/50">
-            FSSAI Lic. No. 10012345678901 ·{" "}
-            <span className="cursor-pointer hover:text-bone">WhatsApp +91 98450 00000</span> ·{" "}
-            <span className="cursor-pointer hover:text-bone">Instagram</span>
+            {compliance.fssai}
+            {" · "}
+            <a
+              href={`https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-bone"
+            >
+              WhatsApp {contact.whatsappDisplay}
+            </a>
+            {" · "}
+            <a href={links.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-bone">
+              Instagram
+            </a>
           </p>
           <p className="font-mono text-[11px] text-bone/40">
-            UPI · Visa · Mastercard · Razorpay · Paytm
+            Deliveries across {serviceAreas.length} areas in Varanasi
           </p>
         </div>
 
         {/* Legal strip */}
         <div className="mt-16 border-t border-motif/20 py-8">
           <div className="flex flex-col gap-2 text-xs text-bone/40 sm:flex-row sm:items-center sm:justify-between">
-            <p>Shubh Milk Pvt. Ltd. · Farm to door since 2019.</p>
+            <p>Shubh Milk · Farm to door across Varanasi.</p>
             <p>© 2026</p>
           </div>
         </div>

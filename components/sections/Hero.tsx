@@ -6,6 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown } from "lucide-react";
+import { claims, compliance, delivery, isPlaceholder } from "@/lib/businessConfig";
 
 interface Slide {
   photo: string;
@@ -22,14 +23,14 @@ const slides: Slide[] = [
   {
     photo: "/images/hero-dawn.jpeg",
     alt: "A Gir cow on the Shubh farm at dawn, mist over the pasture",
-    overline: "FARM TO DOORSTEP · SINCE 2019",
+    overline: "FARM TO DOORSTEP · VARANASI",
     line1: (
       <>
         Shudh. <em className="font-light">Shubh.</em>
       </>
     ),
     line2: "Roz.",
-    sub: "A2 desi cow milk in returnable glass bottles. At your door before 7 AM. Every single morning.",
+    sub: `A2 desi cow milk in returnable glass bottles. At your door, ${delivery.time}. Every single morning.`,
     cta: { label: "Start a Subscription", href: "/subscribe" },
     ghost: { label: "Find Your Pincode", href: "/subscribe" },
   },
@@ -57,17 +58,18 @@ const slides: Slide[] = [
       </>
     ),
     line2: "6:45 AM.",
-    sub: "Collected at 4:30, chilled within ninety minutes, bottled in glass and delivered before sunrise.",
+    sub: `Chilled within ninety minutes, bottled in glass and delivered before you wake. Dairy dispatch: ${claims.dairyLeaveTime}.`,
     cta: { label: "Build Your Rhythm", href: "/subscribe" },
     ghost: { label: "See Our Farms", href: "/farms" },
   },
 ];
 
+/** Every figure here is a public claim sourced from lib/businessConfig.ts. */
 const stats = [
-  { n: "12,000+", l: "homes served" },
-  { n: "4:30 AM", l: "milk leaves the farm" },
+  { n: claims.homesServed, l: "homes served" },
+  { n: claims.dairyLeaveTime, l: "milk leaves the farm" },
   { n: "100%", l: "A2 · lab tested" },
-  { n: "40×", l: "each bottle reused" },
+  { n: isPlaceholder(claims.bottleReuse) ? claims.bottleReuse : `${claims.bottleReuse}\u00d7`, l: "each bottle reused" },
 ];
 
 const AUTOPLAY_MS = 6500;
@@ -186,6 +188,7 @@ export default function Hero() {
                   fill
                   priority={i === 0}
                   sizes="100vw"
+                  quality={70}
                   className="object-cover transition-transform duration-[9000ms] ease-out"
                   style={{ transform: i === active ? "scale(1.06)" : "scale(1)" }}
                 />
@@ -198,13 +201,13 @@ export default function Hero() {
             {/* floating glass metric cards (DRIFT spec) */}
             <div className="absolute right-6 top-6 hidden flex-col gap-3 lg:flex lg:right-10 lg:top-10">
               <div data-hero-glass>
-                <GlassCard label="FSSAI CERTIFIED" sub="Every batch, every day" />
+                <GlassCard label={`FSSAI ${compliance.fssai}`} sub="Licence number on every bottle" />
               </div>
               <div data-hero-glass>
                 <GlassCard label="100% A2 GIR COW" sub="Single-farm, never blended" />
               </div>
               <div data-hero-glass>
-                <GlassCard label="GLASS, NOT PLASTIC" sub="Returned & reused 40× a year" />
+                <GlassCard label="GLASS, NOT PLASTIC" sub={`Returned & reused ${claims.bottleReuse}${isPlaceholder(claims.bottleReuse) ? "" : "\u00d7"}`} />
               </div>
             </div>
 
@@ -284,10 +287,21 @@ export default function Hero() {
         </div>
 
         {/* floating stats bar below the stage */}
-        <div data-hero-stats className="card mt-6 grid grid-cols-2 gap-y-6 px-8 py-6 sm:grid-cols-4 lg:px-12">
+        <div data-hero-stats className="card mt-6 grid grid-cols-2 gap-x-6 gap-y-6 px-6 py-6 sm:grid-cols-4 lg:px-12">
           {stats.map((st) => (
-            <div key={st.l} className="text-center sm:text-left">
-              <p className="display text-2xl text-ink lg:text-3xl">{st.n}</p>
+            <div key={st.l} className="min-w-0 text-center sm:text-left">
+              {/* An unfilled placeholder is much longer than a real figure, so it
+                  is set small and allowed to wrap; a real value gets the full
+                  display treatment. */}
+              <p
+                className={
+                  isPlaceholder(st.n)
+                    ? "display break-all text-sm leading-snug text-kesar lg:text-base"
+                    : "display text-2xl text-ink lg:text-3xl"
+                }
+              >
+                {st.n}
+              </p>
               <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
                 {st.l}
               </p>

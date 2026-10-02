@@ -4,18 +4,55 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SilkReveal from "@/components/motion/SilkReveal";
-
-const stats = [
-  { value: 12000, suffix: "+", label: "homes served every morning", hi: "हर सुबह, हर घर" },
-  { value: 1200, suffix: "+", label: "litres of A2 milk daily", hi: "रोज़ाना शुद्ध दूध" },
-  { value: 40, suffix: "×", label: "each glass bottle reused", hi: "बोतल, बार-बार" },
-  { value: 2019, suffix: "", label: "farm to doorstep since", hi: "जड़ों से जुड़े" },
-];
+import { brand, claims, isPlaceholder } from "@/lib/businessConfig";
 
 /**
- * StatsBand — "Every Number Tells a Story" (Rosier) with animated counters.
- * Numbers count up once on scroll-in; bilingual heading like Rosier/Rishi Sagar.
+ * StatsBand — "Every Number Tells a Story" with animated counters.
+ * Numbers count up once on scroll-in; bilingual heading kept as-is.
+ *
+ * NOTE: the counters animate numerically, so the real figures are parsed out
+ * of the config strings ("2,000+" → 2000). Until you fill claims.* the
+ * parse yields 0 and the band shows 0 — that is deliberate: an obvious zero
+ * is better than a confident invented number.
  */
+const num = (v: string): number => {
+  const digits = v.replace(/[^0-9]/g, "");
+  return digits ? Number(digits) : 0;
+};
+
+const suffixOf = (v: string): string => v.replace(/[0-9,\s]/g, "") || "";
+
+const stats = [
+  {
+    raw: claims.homesServed,
+    value: num(claims.homesServed),
+    suffix: suffixOf(claims.homesServed),
+    label: "homes served every morning",
+    hi: "हर सुबह, हर घर",
+  },
+  {
+    raw: claims.litresDaily,
+    value: num(claims.litresDaily),
+    suffix: suffixOf(claims.litresDaily),
+    label: "litres delivered daily",
+    hi: "रोज़ाना ताज़ा दूध",
+  },
+  {
+    raw: claims.bottleReuse,
+    value: num(claims.bottleReuse),
+    suffix: "\u00d7",
+    label: "each glass bottle reused",
+    hi: "बोतल, बार-बार",
+  },
+  {
+    raw: brand.since,
+    value: num(brand.since),
+    suffix: "",
+    label: "farm to doorstep since",
+    hi: "जड़ों से जुड़े",
+  },
+];
+
 export default function StatsBand() {
   const root = useRef<HTMLElement>(null);
   const [run, setRun] = useState(false);
@@ -71,9 +108,16 @@ export default function StatsBand() {
         <div className="mt-16 grid grid-cols-2 gap-y-12 lg:grid-cols-4">
           {stats.map((s, i) => (
             <div key={s.label} className="text-center">
-              <p className="display text-4xl font-medium text-bone lg:text-6xl">
-                {fmt(vals[i])}
-                {s.suffix}
+              {/* While the claim is unfilled we show the placeholder itself, so
+                  nobody quotes an invented figure and you can see what to fill. */}
+              <p
+                className={
+                  isPlaceholder(s.raw)
+                    ? "display text-xl font-medium text-kesar lg:text-2xl"
+                    : "display text-4xl font-medium text-bone lg:text-6xl"
+                }
+              >
+                {isPlaceholder(s.raw) ? s.raw : `${fmt(vals[i])}${s.suffix}`}
               </p>
               <p className="mx-auto mt-3 max-w-[220px] text-sm leading-[1.6] text-bone/70">
                 {s.label}

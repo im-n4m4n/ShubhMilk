@@ -13,11 +13,19 @@ import "./globals.css";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import PaperGrain from "@/components/patterns/PaperGrain";
 import { Toasts } from "@/components/motion/toast";
+import { LanguageProvider } from "@/lib/i18n";
+import { brand, location } from "@/lib/businessConfig";
 
+/**
+ * Default metadata. Individual pages override title/description from
+ * lib/translations.ts (see the per-route metadata exports).
+ * The old version claimed "since 2019" — an unverified date — so it now
+ * reads brand.since from lib/businessConfig.ts instead.
+ */
 export const metadata: Metadata = {
-  title: "Shubh Milk — Shudh. Shubh. Roz.",
-  description:
-    "A2 desi cow milk in returnable glass bottles, delivered before sunrise. Farm to doorstep since 2019.",
+  title: "Shubh Milk — fresh dairy, delivered every morning",
+  description: `Fresh cow, buffalo and A2 milk, dahi, paneer and ghee delivered home in ${location.city}. Returnable glass bottles, no adulteration. Order on WhatsApp.`,
+  applicationName: brand.name,
 };
 
 export default function RootLayout({
@@ -26,11 +34,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    /* lang starts as Hindi (the default); LanguageProvider updates it on switch. */
+    <html lang="hi">
       <body>
-        <PaperGrain />
-        <Toasts />
-        <SmoothScroll>{children}</SmoothScroll>
+        <LanguageProvider>
+          <PaperGrain />
+          <Toasts />
+          <SmoothScroll>{children}</SmoothScroll>
+        </LanguageProvider>
       </body>
     </html>
   );

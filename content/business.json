@@ -1,0 +1,93 @@
+{
+  "brand": {
+    "name": "Shubh Milk",
+    "legalName": "[LEGAL_NAME]",
+    "gstin": "[GSTIN]",
+    "since": "[SINCE_YEAR]"
+  },
+  "contact": {
+    "phone": "[PHONE]",
+    "whatsapp": "[WHATSAPP]",
+    "phoneDisplay": "[PHONE_DISPLAY]",
+    "whatsappDisplay": "[WHATSAPP_DISPLAY]",
+    "email": "[EMAIL]"
+  },
+  "location": {
+    "address": "[ADDRESS]",
+    "locality": "[LOCALITY]",
+    "city": "Varanasi",
+    "state": "Uttar Pradesh",
+    "pincode": "[PINCODE]",
+    "mapEmbed": "[GOOGLE_MAPS_EMBED]"
+  },
+  "compliance": {
+    "fssai": "[FSSAI]"
+  },
+  "rates": {
+    "cow": "[RATE_COW]",
+    "buffalo": "[RATE_BUFFALO]",
+    "a2": "[RATE_A2]",
+    "dahi": "[RATE_DAHI]",
+    "paneer": "[RATE_PANEER]",
+    "ghee": "[RATE_GHEE]"
+  },
+  "rateUnits": {
+    "cow": "/ litre",
+    "buffalo": "/ litre",
+    "a2": "/ litre",
+    "dahi": "/ kg",
+    "paneer": "/ kg",
+    "ghee": "/ litre"
+  },
+  "delivery": {
+    "time": "[DELIVERY_TIME]",
+    "opens": "[OPENS_24H]",
+    "closes": "[CLOSES_24H]",
+    "minOrder": "[MIN_ORDER]",
+    "freeDeliveryAbove": "[FREE_DELIVERY_ABOVE]",
+    "orderCutoff": "[ORDER_CUTOFF]",
+    "days": "[DELIVERY_DAYS]"
+  },
+  "payments": {
+    "upiId": "[UPI_ID]",
+    "payeeName": "[PAYEE_NAME]",
+    "upiQrImage": "[UPI_QR_IMAGE]",
+    "methods": ["UPI", "Cash on delivery", "Monthly bill"]
+  },
+  "offers": {
+    "firstOrder": "[FIRST_ORDER_OFFER]",
+    "referral": "[REFERRAL_OFFER]",
+    "loyalty": "[LOYALTY_OFFER]"
+  },
+  "claims": {
+    "homesServed": "[HOMES_SERVED]",
+    "litresDaily": "[LITRES_DAILY]",
+    "bottleReuse": "[BOTTLE_REUSE_COUNT]",
+    "dairyLeaveTime": "[DAIRY_LEAVE_TIME]",
+    "rating": "[RATING]",
+    "reviewCount": "[REVIEW_COUNT]"
+  },
+  "links": {
+    "instagram": "[INSTAGRAM_LINK]",
+    "gmb": "[GMB_LINK]",
+    "googleMaps": "[GOOGLE_MAPS_LINK]",
+    "siteUrl": "[SITE_URL]"
+  },
+  "bottleDeposit": {
+    "amount": "[BOTTLE_DEPOSIT]",
+    "currency": "₹",
+    "per": "per bottle"
+  },
+  "quality": {
+    "labName": "[LAB_NAME]",
+    "sampledAt": "[SAMPLE_TIME]",
+    "reportUpdated": "[REPORT_UPDATED]",
+    "batchFormat": "[BATCH_FORMAT]",
+    "fat": "[FAT]",
+    "snf": "[SNF]",
+    "protein": "[PROTEIN]",
+    "temperature": "[TEMP]",
+    "mbrt": "[MBRT]",
+    "adulteration": "[ADULTERATION_RESULT]"
+  }
+}

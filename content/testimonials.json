@@ -1,0 +1,7 @@
+{
+  "testimonials": [
+    { "quote": "[TESTIMONIAL_1_QUOTE]", "name": "[TESTIMONIAL_1_NAME]", "area": "[TESTIMONIAL_1_AREA]" },
+    { "quote": "[TESTIMONIAL_2_QUOTE]", "name": "[TESTIMONIAL_2_NAME]", "area": "[TESTIMONIAL_2_AREA]" },
+    { "quote": "[TESTIMONIAL_3_QUOTE]", "name": "[TESTIMONIAL_3_NAME]", "area": "[TESTIMONIAL_3_AREA]" }
+  ]
+}

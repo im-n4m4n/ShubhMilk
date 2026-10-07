@@ -30,8 +30,9 @@ yarn-error.log*
 *.log
 *_exit.txt
 
-# env files
+# env files (keep the template in git)
 .env*
+!.env.example
 
 # vercel
 .vercel

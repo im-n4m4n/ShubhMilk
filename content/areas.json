@@ -1,0 +1,25 @@
+{
+  "serviceAreas": [
+    { "name": "Lanka", "slug": "lanka", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Assi", "slug": "assi", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Bhelupur", "slug": "bhelupur", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Sigra", "slug": "sigra", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Mahmoorganj", "slug": "mahmoorganj", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Ravindrapuri", "slug": "ravindrapuri", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Sarnath", "slug": "sarnath", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Cantt", "slug": "cantt", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Pandeypur", "slug": "pandeypur", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Teliyabagh", "slug": "teliyabagh", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Orderly Bazar", "slug": "orderly-bazar", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" },
+    { "name": "Ramnagar", "slug": "ramnagar", "pincode": "[PINCODE]", "mapLink": "[GOOGLE_MAPS_LINK]" }
+  ],
+  "customerSegments": [
+    { "key": "families", "label": "[SEGMENT_FAMILIES]" },
+    { "key": "hostels", "label": "[SEGMENT_HOSTELS]" },
+    { "key": "cafes", "label": "[SEGMENT_CAFES]" },
+    { "key": "chaistalls", "label": "[SEGMENT_CHAI_STALLS]" },
+    { "key": "sweetshops", "label": "[SEGMENT_SWEET_SHOPS]" },
+    { "key": "hotels", "label": "[SEGMENT_HOTELS]" },
+    { "key": "ashrams", "label": "[SEGMENT_ASHRAMS]" }
+  ]
+}

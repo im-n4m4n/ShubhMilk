@@ -1,0 +1,34 @@
+{
+  "plans": [
+    {
+      "key": "trial",
+      "priceLabel": "[PLAN_PRICE_TRIAL]",
+      "volume": "[PLAN_VOLUME_TRIAL]",
+      "note": "Free trial — 2 days. Fixed by the brief."
+    },
+    {
+      "key": "weekly",
+      "priceLabel": "[PLAN_PRICE_WEEKLY]",
+      "volume": "[PLAN_VOLUME_WEEKLY]",
+      "note": "Weekly plan."
+    },
+    {
+      "key": "monthly",
+      "priceLabel": "[PLAN_PRICE]",
+      "volume": "[PLAN_VOLUME_MONTHLY]",
+      "note": "Monthly plan — the main conversion."
+    },
+    {
+      "key": "family",
+      "priceLabel": "[PLAN_PRICE_FAMILY]",
+      "volume": "[PLAN_VOLUME_FAMILY]",
+      "note": "Family pack — 2L / 3L daily."
+    },
+    {
+      "key": "b2b",
+      "priceLabel": "[PLAN_PRICE_B2B]",
+      "volume": "[PLAN_VOLUME_B2B]",
+      "note": "Hostel / PG / cafe / hotel — quote-based, min quantity in [B2B_MIN_QTY]."
+    }
+  ]
+}

@@ -21,7 +21,7 @@
  * ============================================================================
  */
 
-import { brand, compliance, contact, delivery, offers, payments, rates } from "./businessConfig";
+import { bottleDeposit, brand, compliance, contact, delivery, offers, payments, rates } from "./businessConfig";
 
 export type Lang = "hi" | "en";
 
@@ -63,6 +63,26 @@ const hi = {
       "वाराणसी में A2 देसी गाय का दूध, एक ही फार्म से, काँच की बोतल में। रोज़ सुबह डिलीवरी।",
     paneerTitle: "पनीर की होम डिलीवरी — शुभ मिल्क, वाराणसी",
     paneerDescription: "रोज़ सुबह ताज़ा बना मलाई पनीर, वाराणसी में घर तक डिलीवरी।",
+    qualityTitle: "क्वालिटी और भरोसा — शुभ मिल्क, वाराणसी",
+    qualityDescription:
+      "रोज़ की लैब जाँच, FSSAI लाइसेंस, काँच की बोतल और कोई मिलावट नहीं — शुभ मिल्क की क्वालिटी रिपोर्ट देखें।",
+    recipesTitle: "घरेलू रेसिपी और त्योहार स्पेशल — शुभ मिल्क",
+    recipesDescription:
+      "लस्सी, पनीर, खीर, दही और ठंडाई की आसान घरेलू रेसिपी — और त्योहारों के लिए ख़ास।",
+    galleryTitle: "गैलरी — शुभ मिल्क, वाराणसी",
+    galleryDescription: "हमारा फार्म, गाय-भैंस, डेयरी और डिलीवरी की तस्वीरें।",
+    bulkTitle: "थोक ऑर्डर (B2B) — होटल, मिठाई की दुकान, चाय की टपरी — शुभ मिल्क",
+    bulkDescription:
+      "होटल, मिठाई की दुकान, चाय की टपरी, मंदिर और रेस्टोरेंट के लिए रोज़ाना दूध की सप्लाई। WhatsApp पर रेट पूछें।",
+    visitTitle: "फार्म विज़िट बुक करें — शुभ मिल्क, वाराणसी",
+    visitDescription:
+      "परिवार के साथ फार्म आएँ — गाय-भैंस देखें, दूध निकालें, बच्चों के लिए एजुकेशनल ट्रिप। WhatsApp पर बुक करें।",
+    privacyTitle: "प्राइवेसी पॉलिसी — शुभ मिल्क",
+    privacyDescription: "शुभ मिल्क आपकी जानकारी कैसे इस्तेमाल करता है।",
+    deliveryPolicyTitle: "डिलीवरी पॉलिसी — शुभ मिल्क",
+    deliveryPolicyDescription: "डिलीवरी समय, इलाके और नियम।",
+    refundPolicyTitle: "रिफंड और कैंसल पॉलिसी — शुभ मिल्क",
+    refundPolicyDescription: "ऑर्डर रद्द, पॉज़ और पैसे वापसी के नियम।",
   },
 
   nav: {
@@ -71,6 +91,8 @@ const hi = {
     areas: "डिलीवरी क्षेत्र",
     order: "ऑर्डर करें",
     contact: "संपर्क",
+    quality: "क्वालिटी",
+    recipes: "रेसिपी",
     languageToggle: "भाषा बदलें",
   },
 
@@ -274,9 +296,15 @@ const hi = {
     a4: "WhatsApp पर एक मैसेज — कब से कब तक बंद रखनी है, बता दें। उतने दिन का पैसा नहीं लगेगा।",
     q5: "बोतल वापस करनी होती है?",
     a5:
-      "जी हाँ। काँच की बोतल हम वापस लेते हैं — अगली डिलीवरी के वक़्त खाली बोतल रख दें। बोतल का कोई अलग चार्ज नहीं।",
+      "जी हाँ। काँच की बोतल हम वापस लेते हैं — अगली डिलीवरी के वक़्त खाली बोतल रख दें। बोतल पर एक रिफंडेबल जमा लगता है, जो बोतल वापस करने पर पूरा मिल जाता है।",
     q6: "दूध ताज़ा है या पहले का?",
-    a6: "रोज़ सुबह की डिलीवरी उसी सुबह के दूध की होती है। [FRESHNESS_DETAIL] जोड़ना चाहें तो यहाँ लिखें।",
+    a6: "रोज़ सुबह की डिलीवरी उसी सुबह के दूध की होती है — न फ्रीज़ में रखा, न कल का।",
+    q7: "बोतल का जमा (डिपॉज़िट) कितना है?",
+    a7:
+      "बोतल का जमा ₹" + bottleDeposit.amount + " प्रति बोतल है। बोतल वापस करने पर पूरा पैसा आपके खाते में वापस आ जाता है।",
+    q8: "क्या मैं दूध की जाँच रिपोर्ट देख सकता/सकती हूँ?",
+    a8:
+      "हाँ। हर बैच फार्म से निकलने से पहले जाँचा जाता है — MBRT, एंटीबायोटिक और मिलावट के लिए। आज की रिपोर्ट क्वालिटी पेज पर देखें, या WhatsApp पर माँग लें।",
     askMore: "और सवाल है? WhatsApp पर पूछ लीजिए — " + contact.whatsappDisplay,
   },
 
@@ -301,8 +329,114 @@ const hi = {
     faqLink: "सवाल-जवाब",
     gmbLink: "Google पर हमें ढूँढें",
     instagramLink: "Instagram",
+    qualityLink: "क्वालिटी और भरोसा",
+    recipesLink: "रेसिपी",
+    galleryLink: "गैलरी",
+    bulkLink: "थोक ऑर्डर",
+    visitLink: "फार्म विज़िट",
+    privacyLink: "प्राइवेसी पॉलिसी",
+    deliveryPolicyLink: "डिलीवरी पॉलिसी",
+    refundPolicyLink: "रिफंड/कैंसल पॉलिसी",
     rights: "सर्वाधिकार सुरक्षित।",
     legalNote: "शुभ मिल्क · वाराणसी में दूध की डिलीवरी।",
+  },
+
+  quality: {
+    title: "क्वालिटी और भरोसा",
+    subtitle: "जो दिख रहा है, वही है — कोई छिपी बात नहीं।",
+    labTitle: "आज की जाँच रिपोर्ट",
+    labSubtitle: "हर बैच फार्म से निकलने से पहले जाँचा जाता है। पूरी रिपोर्ट WhatsApp पर माँगें।",
+    rowFat: "फैट (FAT)",
+    rowSnf: "एसएनएफ (SNF)",
+    rowProtein: "प्रोटीन",
+    rowTemp: "तापमान",
+    rowMbrt: "एमबीआरटी (MBRT)",
+    rowAdulteration: "मिलावट जाँच",
+    batchLabel: "बैच नंबर",
+    sampledLabel: "सैंपल का समय",
+    reportLabel: "रिपोर्ट अपडेट",
+    labLabel: "लैब",
+    fssaiTitle: "FSSAI लाइसेंस",
+    depositTitle: "बोतल जमा (रिफंडेबल)",
+    depositDesc: "हर काँच की बोतल पर एक रिफंडेबल जमा लगता है — बोतल वापस करने पर पूरा पैसा वापस।",
+    reportsCta: "पूरी रिपोर्ट WhatsApp पर पाएँ",
+  },
+
+  cows: {
+    title: "हमारी गायें",
+    subtitle: "जिन गाय-भैंस से आपका दूध आता है, उन्हें जानिए।",
+    breedLabel: "नस्ल",
+    ageLabel: "उम्र",
+    adoptTitle: "गाय गोद लें (Adopt a Cow)",
+    adoptDesc:
+      "गोद लेने के प्लान में आप किसी एक गाय के खर्च का हिस्सा बनते हैं — बदले में उसकी ख़बर और उसी का ताज़ा दूध। रेट और शर्तें WhatsApp पर पूछें।",
+    adoptCta: "गोद लेने के बारे में पूछें",
+  },
+
+  recipes: {
+    title: "घरेलू रेसिपी",
+    subtitle: "हमारे दूध, दही और घी से बने आसान घरेलू नुस्खे।",
+    timeLabel: "समय",
+    itemsLabel: "सामग्री",
+    stepsLabel: "विधि",
+    productLabel: "इसमें इस्तेमाल हुआ",
+    festivalTitle: "त्योहार स्पेशल",
+    festivalSubtitle: "त्योहारों के लिए ख़ास — एक दिन पहले WhatsApp पर बता दें।",
+  },
+
+  gallery: {
+    title: "गैलरी",
+    subtitle: "फार्म से आपके दरवाज़े तक — कुछ पल।",
+  },
+
+  bulk: {
+    title: "थोक ऑर्डर (B2B)",
+    subtitle: "होटल, मिठाई की दुकान, चाय की टपरी, मंदिर और रेस्टोरेंट के लिए रोज़ की सप्लाई।",
+    whoTitle: "हम किसे सप्लाई करते हैं",
+    rateLabel: "रेट",
+    rateNote: "थोक रेट मात्रा के हिसाब से तय होता है — WhatsApp पर अपनी रोज़ की ज़रूरत बताएँ, हम रेट और समय बता देंगे।",
+    cta: "WhatsApp पर थोक रेट पूछें",
+  },
+
+  visit: {
+    title: "फार्म विज़िट बुक करें",
+    subtitle: "देखिए आपका दूध कहाँ से आता है — गाय, दूध निकालना और काँच की बोतलें। बच्चों के लिए शानदार।",
+    name: "आपका नाम",
+    mobile: "मोबाइल नंबर",
+    date: "किस दिन आना है",
+    group: "कितने लोग आएँगे",
+    notes: "कुछ और बताना हो तो",
+    freeNote: "विज़िट फ्री है — बस एक दिन पहले बता दें ताकि चाय तैयार रहे।",
+    submit: "WhatsApp पर विज़िट बुक करें",
+    success: "धन्यवाद! हम WhatsApp पर समय कन्फ़र्म करेंगे।",
+  },
+
+  policies: {
+    privacyTitle: "प्राइवेसी पॉलिसी",
+    privacyIntro: "यह पॉलिसी बताती है कि शुभ मिल्क आपकी जानकारी क्या रखता है और क्यों।",
+    privacyPoints: [
+      "ऑर्डर के लिए हम सिर्फ़ नाम, मोबाइल नंबर और पता रखते हैं।",
+      "आपकी बातचीत WhatsApp पर होती है — ऑर्डर कन्फ़र्म करने और डिलीवरी के लिए।",
+      "आपकी जानकारी हम किसी को बेचते नहीं।",
+      "खाता बंद कराने पर WhatsApp पर बोलें — आपकी जानकारी हम अपने रिकॉर्ड से हटा देंगे।",
+    ],
+    deliveryTitle: "डिलीवरी पॉलिसी",
+    deliveryIntro: "डिलीवरी के समय, इलाके और नियम — साफ़-साफ़।",
+    deliveryPoints: [
+      "डिलीवरी रोज़ सुबह होती है — इलाके के हिसाब से समय थोड़ा आगे-पीछे हो सकता है।",
+      "अगली सुबह के लिए ऑर्डर/बदलाव की आख़िरी समय-सीमा WhatsApp पर बताई जाती है।",
+      "घर कोई न हो तो बोतल गेट पर रखने को कह सकते हैं — अपने डिलीवरी भाई से तय कर लें।",
+      "किसी दिन देर हो तो हम WhatsApp पर पहले बता देते हैं।",
+    ],
+    refundTitle: "रिफंड और कैंसल पॉलिसी",
+    refundIntro: "पॉज़, कैंसल और पैसे वापसी — बिना झंझट।",
+    refundPoints: [
+      "डिलीवरी कभी भी पॉज़ करें — WhatsApp पर एक मैसेज। पॉज़ के दिनों का कोई चार्ज नहीं।",
+      "प्लान कभी भी बंद करें — बाकी बची ऐडवांस रक़म UPI पर वापस कर दी जाती है।",
+      "बोतल का जमा बोतल वापस करने पर पूरा वापस मिलता है।",
+      "डिलीवरी ग़ायब या खराब हो तो उसी दिन बताएँ — हम दोबारा भेजेंगे या बिल में काट लेंगे।",
+    ],
+    reviewNote: "यह शुरुआती ड्राफ़्ट है — पब्लिश करने से पहले अपने हिसाब से ज़रूर जाँच लें।",
   },
 
   common: {
@@ -345,6 +479,26 @@ const en: Copy = {
       "Single-farm A2 desi cow milk in returnable glass bottles, delivered every morning in Varanasi.",
     paneerTitle: "Paneer Home Delivery — Shubh Milk, Varanasi",
     paneerDescription: "Fresh malai paneer made every morning and delivered home in Varanasi.",
+    qualityTitle: "Quality & Trust — Shubh Milk, Varanasi",
+    qualityDescription:
+      "Daily lab testing, FSSAI licence, returnable glass bottles and zero adulteration — read our quality report.",
+    recipesTitle: "Home Recipes & Festival Specials — Shubh Milk",
+    recipesDescription:
+      "Easy home recipes for lassi, paneer, kheer, dahi and thandai — plus festival specials.",
+    galleryTitle: "Gallery — Shubh Milk, Varanasi",
+    galleryDescription: "Our farm, our cows, the dairy and the morning delivery route.",
+    bulkTitle: "Bulk Orders (B2B) — Hotels, Sweet Shops, Tea Stalls — Shubh Milk",
+    bulkDescription:
+      "Daily milk supply for hotels, sweet shops, tea stalls, temples and restaurants. Ask rates on WhatsApp.",
+    visitTitle: "Book a Farm Visit — Shubh Milk, Varanasi",
+    visitDescription:
+      "Bring the family to the farm — meet the cows, try milking, see the glass bottling. A great school-holiday trip. Book on WhatsApp.",
+    privacyTitle: "Privacy Policy — Shubh Milk",
+    privacyDescription: "How Shubh Milk handles your information.",
+    deliveryPolicyTitle: "Delivery Policy — Shubh Milk",
+    deliveryPolicyDescription: "Delivery timings, areas and rules.",
+    refundPolicyTitle: "Refund & Cancellation Policy — Shubh Milk",
+    refundPolicyDescription: "How cancellations, pauses and refunds work.",
   },
 
   nav: {
@@ -353,6 +507,8 @@ const en: Copy = {
     areas: "Delivery Areas",
     order: "Order",
     contact: "Contact",
+    quality: "Quality",
+    recipes: "Recipes",
     languageToggle: "Change language",
   },
 
@@ -556,10 +712,16 @@ const en: Copy = {
       "One WhatsApp message saying from when to when. You are not charged for the paused days.",
     q5: "Do I have to return the bottle?",
     a5:
-      "Yes please. We take the glass bottles back — leave the empty bottle out at the next delivery. There is no separate bottle charge.",
+      "Yes please. We take the glass bottles back — leave the empty bottle out at the next delivery. There is a small refundable deposit on each bottle, returned in full when you hand it back.",
     q6: "Is the milk fresh or stored?",
     a6:
-      "What you get each morning is that same morning's milk. [FRESHNESS_DETAIL] can be added here.",
+      "What you get each morning is that same morning's milk — not stored, not yesterday's.",
+    q7: "How much is the bottle deposit?",
+    a7:
+      "The deposit is ₹" + bottleDeposit.amount + " per bottle. It comes straight back to your account whenever you return the bottle.",
+    q8: "Can I see the milk test report?",
+    a8:
+      "Yes. Every batch is tested before it leaves the farm — MBRT, antibiotics and adulterants. Read today's report on the Quality page, or just ask on WhatsApp.",
     askMore: "More questions? Just ask on WhatsApp — " + contact.whatsappDisplay,
   },
 
@@ -584,8 +746,114 @@ const en: Copy = {
     faqLink: "FAQs",
     gmbLink: "Find us on Google",
     instagramLink: "Instagram",
+    qualityLink: "Quality & Trust",
+    recipesLink: "Recipes",
+    galleryLink: "Gallery",
+    bulkLink: "Bulk Orders",
+    visitLink: "Farm Visit",
+    privacyLink: "Privacy Policy",
+    deliveryPolicyLink: "Delivery Policy",
+    refundPolicyLink: "Refund/Cancellation Policy",
     rights: "All rights reserved.",
     legalNote: "Shubh Milk · Milk delivery in Varanasi.",
+  },
+
+  quality: {
+    title: "Quality & Trust",
+    subtitle: "What you see is what it is — nothing hidden.",
+    labTitle: "Today's test report",
+    labSubtitle: "Every batch is tested before it leaves the farm. Ask on WhatsApp for the full report.",
+    rowFat: "Fat",
+    rowSnf: "SNF",
+    rowProtein: "Protein",
+    rowTemp: "Temperature",
+    rowMbrt: "MBRT",
+    rowAdulteration: "Adulteration test",
+    batchLabel: "Batch number",
+    sampledLabel: "Sampled at",
+    reportLabel: "Report updated",
+    labLabel: "Lab",
+    fssaiTitle: "FSSAI licence",
+    depositTitle: "Bottle deposit (refundable)",
+    depositDesc: "Each glass bottle carries a small refundable deposit — returned in full when you hand the bottle back.",
+    reportsCta: "Get the full report on WhatsApp",
+  },
+
+  cows: {
+    title: "Our cows",
+    subtitle: "Meet the animals behind your morning milk.",
+    breedLabel: "Breed",
+    ageLabel: "Age",
+    adoptTitle: "Adopt a cow",
+    adoptDesc:
+      "In the adopt-a-cow plan you sponsor one animal's keep — and in return hear her news and drink her milk. Ask on WhatsApp for the amount and terms.",
+    adoptCta: "Ask about adopting",
+  },
+
+  recipes: {
+    title: "Home recipes",
+    subtitle: "Easy, honest recipes made with our milk, dahi and ghee.",
+    timeLabel: "Time",
+    itemsLabel: "You need",
+    stepsLabel: "Method",
+    productLabel: "Made with",
+    festivalTitle: "Festival specials",
+    festivalSubtitle: "For festivals — tell us a day ahead on WhatsApp.",
+  },
+
+  gallery: {
+    title: "Gallery",
+    subtitle: "From the farm to your doorstep — a few moments.",
+  },
+
+  bulk: {
+    title: "Bulk orders (B2B)",
+    subtitle: "Daily supply for hotels, sweet shops, tea stalls, temples and restaurants.",
+    whoTitle: "Who we supply",
+    rateLabel: "Rate",
+    rateNote: "Bulk rates depend on quantity — tell us your daily need on WhatsApp and we will confirm rate and timing.",
+    cta: "Ask bulk rates on WhatsApp",
+  },
+
+  visit: {
+    title: "Book a farm visit",
+    subtitle: "See where your milk comes from — the cows, the milking, the glass bottles. Children love it.",
+    name: "Your name",
+    mobile: "Mobile number",
+    date: "Which day",
+    group: "How many people",
+    notes: "Anything else we should know",
+    freeNote: "Visits are free — just tell us a day ahead so the chai is ready.",
+    submit: "Book the visit on WhatsApp",
+    success: "Dhanyavaad! We will confirm the time on WhatsApp.",
+  },
+
+  policies: {
+    privacyTitle: "Privacy policy",
+    privacyIntro: "What Shubh Milk stores about you, and why.",
+    privacyPoints: [
+      "For orders we keep only your name, mobile number and address.",
+      "Your chats happen on WhatsApp — to confirm orders and arrange delivery.",
+      "We never sell your information to anyone.",
+      "Want your details removed? Message us on WhatsApp and we will delete them from our records.",
+    ],
+    deliveryTitle: "Delivery policy",
+    deliveryIntro: "Timings, areas and rules — plainly stated.",
+    deliveryPoints: [
+      "Delivery is every morning; the exact time can vary a little by area.",
+      "The cut-off for ordering or changing tomorrow's delivery is shared on WhatsApp.",
+      "Nobody home? You can ask for bottles to be left at the gate — agree it with your delivery person.",
+      "If we are ever late, we tell you on WhatsApp first.",
+    ],
+    refundTitle: "Refund & cancellation policy",
+    refundIntro: "Pauses, cancellations and refunds — without the fine print.",
+    refundPoints: [
+      "Pause delivery any time with one WhatsApp message. Paused days are never charged.",
+      "Stop your plan any time — any advance balance is refunded over UPI.",
+      "The bottle deposit is returned in full whenever you return the bottles.",
+      "A missing or spoiled delivery? Tell us the same day and we redeliver or adjust your bill.",
+    ],
+    reviewNote: "This is a starting draft — please review it before you rely on it in public.",
   },
 
   common: {

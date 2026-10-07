@@ -6,13 +6,44 @@ import { Check, LoaderCircle } from "lucide-react";
 import { inr } from "@/lib/products";
 import { useCart } from "@/lib/store";
 
-type Phase = "idle" | "creating" | "done" | "error";
+type Phase = "idle" | "creating" | "paying" | "verifying" | "done" | "error";
+
+interface RazorpaySuccess {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+}
+
+interface RazorpayInstance {
+  open: () => void;
+  on: (event: string, handler: (payload: RazorpaySuccess) => void) => void;
+}
 
 /**
- * CheckoutButton — posts the cart to /api/checkout (Razorpay when env creds
- * exist, deterministic stub otherwise) and shows order confirmation inline.
- * The Razorpay checkout.js popup opens only when mode === "razorpay".
+ * CheckoutButton — the full payment flow.
+ *
+ * 1. POST /api/checkout  → creates a Razorpay order (server re-prices the
+ *    cart; the client total is never trusted).
+ * 2. Live mode: opens the Razorpay sheet (UPI / cards / netbanking / wallets).
+ *    Stub mode (no keys configured): skips straight to confirmation so the
+ *    flow can be developed and demoed.
+ * 3. Live mode only: the success handler POSTs the payment triple to
+ *    /api/checkout/verify, which checks Razorpay's HMAC-SHA256 signature.
+ *    "Order confirmed" is shown ONLY after that check passes.
  */
+
+/** checkout.js is lazy-loaded in the layout; wait for it if a customer
+ *  reaches checkout before the script has finished loading. */
+const waitForRazorpay = async (timeoutMs = 4000): Promise<boolean> => {
+  const started = Date.now();
+  while (Date.now() - started < timeoutMs) {
+    const w = window as unknown as { Razorpay?: unknown };
+    if (w.Razorpay) return true;
+    await new Promise((r) => setTimeout(r, 150));
+  }
+  return false;
+};
+
 export default function CheckoutButton({ subtotal }: { subtotal: number }) {
   const lines = useCart((s) => s.lines);
   const subPincode = useCart((s) => s.subPincode);
@@ -22,7 +53,42 @@ export default function CheckoutButton({ subtotal }: { subtotal: number }) {
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [paymentId, setPaymentId] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const confirmOrder = (id: string, payId?: string) => {
+    setOrderId(id);
+    setPaymentId(payId ?? null);
+    setPhase("done");
+    clear();
+  };
+
+  const verifyPayment = async (payload: RazorpaySuccess) => {
+    setPhase("verifying");
+    try {
+      const res = await fetch("/api/checkout/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+      if (res.ok && data.ok) {
+        confirmOrder(payload.razorpay_order_id, payload.razorpay_payment_id);
+      } else {
+        // Signature failed: do NOT confirm. Real money may have moved —
+        // tell the customer honestly and ask them to contact us.
+        setErrorMsg(
+          data.error === "Payment gateway not configured"
+            ? "Payment gateway not configured — pay on delivery instead"
+            : "Payment could not be verified. If money left your account it will be refunded by Razorpay. Please WhatsApp us.",
+        );
+        setPhase("error");
+      }
+    } catch {
+      setErrorMsg("Network error while verifying payment — please WhatsApp us with your payment id");
+      setPhase("error");
+    }
+  };
 
   const checkout = async () => {
     setPhase("creating");
@@ -51,34 +117,57 @@ export default function CheckoutButton({ subtotal }: { subtotal: number }) {
         return;
       }
 
-      if (data.mode === "razorpay" && typeof window !== "undefined") {
-        // Live gateway: open Razorpay's checkout.js popup.
+      if (data.mode === "razorpay") {
+        const ready = await waitForRazorpay();
         const w = window as unknown as {
-          Razorpay?: new (options: Record<string, unknown>) => { open: () => void };
+          Razorpay?: new (options: Record<string, unknown>) => RazorpayInstance;
         };
-        if (w.Razorpay) {
-          const rzp = new w.Razorpay({
-            key: data.keyId ?? "",
-            order_id: data.orderId,
-            name: "Shubh Milk",
-            description: "Farm to doorstep",
-            theme: { color: "#E08A2E" },
-          });
-          rzp.open();
-          setPhase("idle");
+        if (!ready || !w.Razorpay) {
+          setErrorMsg("Payment sheet failed to load — check your connection and try again");
+          setPhase("error");
           return;
         }
-        // Script not loaded — fall through to confirmation with the order id.
+        setPhase("paying");
+        const rzp = new w.Razorpay({
+          key: data.keyId ?? "",
+          order_id: data.orderId,
+          name: "Shubh Milk",
+          description: "Farm to doorstep",
+          theme: { color: "#E08A2E" },
+          handler: (payload: RazorpaySuccess) => {
+            void verifyPayment(payload);
+          },
+          modal: {
+            ondismiss: () => {
+              // Customer closed the sheet without paying — back to the cart.
+              setPhase("idle");
+            },
+          },
+        });
+        rzp.on("payment.failed", () => {
+          setErrorMsg("Payment failed. No money was taken — please try again.");
+          setPhase("error");
+        });
+        rzp.open();
+        return;
       }
 
-      setOrderId(data.orderId);
-      setPhase("done");
-      clear();
+      // Stub mode: no keys configured, develop/demo flow.
+      confirmOrder(data.orderId);
     } catch {
       setErrorMsg("Network error — please try again");
       setPhase("error");
     }
   };
+
+  const label =
+    phase === "creating"
+      ? "Creating order…"
+      : phase === "paying"
+        ? "Complete the payment in the popup…"
+        : phase === "verifying"
+          ? "Verifying payment…"
+          : `Checkout · ${inr(subtotal)}`;
 
   return (
     <div className="mt-6">
@@ -99,6 +188,7 @@ export default function CheckoutButton({ subtotal }: { subtotal: number }) {
             </span>
             <p className="display mt-3 text-lg text-ink">Order confirmed</p>
             <p className="mt-1 font-mono text-[11px] text-muted">
+              {paymentId ? `Payment ${paymentId} · ` : ""}
               {orderId} · First delivery tomorrow before 7 AM
             </p>
           </motion.div>
@@ -124,19 +214,19 @@ export default function CheckoutButton({ subtotal }: { subtotal: number }) {
           <motion.button
             key="button"
             type="button"
-            disabled={phase === "creating" || subtotal === 0}
+            disabled={phase === "creating" || phase === "verifying" || subtotal === 0}
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={checkout}
             className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-ink px-8 py-4 text-[15px] font-medium text-bone transition-transform duration-200 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
           >
-            {phase === "creating" ? (
+            {phase === "creating" || phase === "verifying" ? (
               <>
                 <LoaderCircle className="h-4 w-4 animate-spin text-kesar" strokeWidth={1.5} />
-                Creating order…
+                {label}
               </>
             ) : (
-              <>Checkout · {inr(subtotal)}</>
+              <>{label}</>
             )}
           </motion.button>
         )}

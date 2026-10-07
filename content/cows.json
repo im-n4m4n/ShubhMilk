@@ -1,0 +1,29 @@
+{
+  "cows": [
+    {
+      "name": "[COW_1_NAME]",
+      "breed": "Gir",
+      "age": "[COW_1_AGE]",
+      "photo": "/images/gir-herd.jpeg",
+      "note": "[COW_1_NOTE]"
+    },
+    {
+      "name": "[COW_2_NAME]",
+      "breed": "Sahiwal",
+      "age": "[COW_2_AGE]",
+      "photo": "/images/farmer-hands.jpeg",
+      "note": "[COW_2_NOTE]"
+    },
+    {
+      "name": "[COW_3_NAME]",
+      "breed": "Gir",
+      "age": "[COW_3_AGE]",
+      "photo": "/images/farm/farm-step-02-milking.jpeg",
+      "note": "[COW_3_NOTE]"
+    }
+  ],
+  "cowSponsor": {
+    "amount": "[COW_SPONSOR_AMOUNT]",
+    "currency": "₹"
+  }
+}

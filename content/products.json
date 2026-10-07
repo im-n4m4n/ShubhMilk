@@ -1,0 +1,22 @@
+{
+  "products": [
+    { "id": "a2-milk-500", "name": "A2 Desi Cow Milk", "category": "a2-milk", "spec": "500ml · A2 · Glass", "price": 78, "mrp": 85, "badge": "bestseller", "blurb": "Our signature. Single-farm A2 milk from indigenous Gir cows, bottled in glass." },
+    { "id": "a2-milk-1l", "name": "A2 Desi Cow Milk", "category": "a2-milk", "spec": "1L · A2 · Glass", "price": 145, "mrp": 160, "badge": null, "blurb": "The family bottle. Same single-farm A2 milk, one litre." },
+    { "id": "buffalo-milk-500", "name": "Buffalo Milk", "category": "buffalo-milk", "spec": "500ml · Glass", "price": 85, "mrp": 95, "badge": "bestseller", "blurb": "Thick, creamy buffalo milk — for chai that stands a spoon in it." },
+    { "id": "buffalo-milk-1l", "name": "Buffalo Milk", "category": "buffalo-milk", "spec": "1L · Glass", "price": 160, "mrp": 175, "badge": null, "blurb": "One litre of full-cream buffalo milk." },
+    { "id": "curd-400", "name": "Set Curd", "category": "curd", "spec": "400g · Glass Jar", "price": 95, "mrp": 105, "badge": "bestseller", "blurb": "Slow-set overnight in the jar you return. Firm, mildly sweet." },
+    { "id": "paneer-200", "name": "Malai Paneer", "category": "paneer", "spec": "200g · Wrapped", "price": 130, "mrp": 145, "badge": null, "blurb": "Soft, milky blocks cut fresh each morning." },
+    { "id": "bilona-ghee-250", "name": "Bilona Ghee", "category": "ghee", "spec": "250ml · Glass Jar", "price": 749, "mrp": 849, "badge": "bestseller", "blurb": "Hand-churned the Vedic way. 30L milk to 1L ghee." },
+    { "id": "bilona-ghee-500", "name": "Bilona Ghee", "category": "ghee", "spec": "500ml · Glass Jar", "price": 1399, "mrp": 1549, "badge": null, "blurb": "Our flagship ghee, half-litre jar." },
+    { "id": "white-butter-200", "name": "White Butter", "category": "butter", "spec": "200g · Wrapped", "price": 145, "mrp": 160, "badge": null, "blurb": "Unsalted cultured white butter, churned from the same cream." },
+    { "id": "lassi-250", "name": "Sweet Lassi", "category": "lassi", "spec": "250ml · Glass", "price": 60, "mrp": 70, "badge": "fresh-today", "blurb": "Thick set lassi, only set curd and a spoon of sugar." },
+    { "id": "chaas-250", "name": "Masala Chaas", "category": "chaas", "spec": "250ml · Glass", "price": 45, "mrp": 55, "badge": "fresh-today", "blurb": "Thin buttermilk with roasted cumin and curry leaf." },
+    { "id": "shrikhand-200", "name": "Kesar Shrikhand", "category": "shrikhand", "spec": "200g · Glass Jar", "price": 140, "mrp": 155, "badge": null, "blurb": "Hung curd folded with kesar and cardamom." },
+    { "id": "kesar-milk-200", "name": "Kesar Thandai Milk", "category": "flavoured-milk", "spec": "200ml · Glass", "price": 75, "mrp": 85, "badge": null, "blurb": "Saffron, almond, cardamom — festival in a bottle." },
+    { "id": "cow-milk-500", "name": "Cow Milk", "category": "cow-milk", "spec": "500ml · Glass", "price": 65, "mrp": 72, "badge": null, "blurb": "Everyday cow milk, single-farm and never blended." },
+    { "id": "cow-milk-1l", "name": "Cow Milk", "category": "cow-milk", "spec": "1L · Glass", "price": 125, "mrp": 138, "badge": null, "blurb": "The everyday family bottle of cow milk." },
+    { "id": "khoya-200", "name": "Khoya (Mawa)", "category": "khoya", "spec": "200g · Wrapped", "price": 160, "mrp": 175, "badge": null, "blurb": "Slow-reduced mawa, made the same morning it is sold." },
+    { "id": "rabri-250", "name": "Rabri", "category": "rabri", "spec": "250g · Glass Jar", "price": 210, "mrp": 230, "badge": null, "blurb": "Thickened milk layered with malai, lightly sweetened." },
+    { "id": "peda-500", "name": "Banarasi Peda", "category": "peda", "spec": "500g · Box", "price": 320, "mrp": 350, "badge": null, "blurb": "Hand-rolled in Kashi, from our own khoya and bilona ghee." }
+  ]
+}

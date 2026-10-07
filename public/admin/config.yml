@@ -1,0 +1,254 @@
+# Shubh Milk — admin panel configuration
+# The panel edits files in content/. Editing this file by hand is fine too,
+# but the forms below are already wired to every field the site reads.
+
+# `local_backend` lets you save from localhost without any login or hosting.
+# The proxy server runs via `npm run admin` (see docs/ADMIN.md).
+local_backend: true
+
+# --- Go-live (later, free): deploy the site, then uncomment and follow
+# --- docs/ADMIN.md §"Editing from your phone".
+# backend:
+#   name: git-gateway
+#   branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+site_url: http://localhost:3000
+
+collections:
+  - label: "Business details"
+    name: "business"
+    files:
+      - label: "Contact, FSSAI, rates, delivery, payments"
+        name: "business"
+        file: "content/business.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Brand"
+            name: "brand"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Legal name (registered entity)", name: "legalName", widget: "string", required: false }
+              - { label: "GSTIN (or 'Not registered')", name: "gstin", widget: "string", required: false }
+              - { label: "Started in (year)", name: "since", widget: "string", required: false }
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Phone (with country code, e.g. +9198xxxxxxx)", name: "phone", widget: "string" }
+              - { label: "WhatsApp (digits only, e.g. 9198xxxxxxx)", name: "whatsapp", widget: "string" }
+              - { label: "Phone as shown on screen", name: "phoneDisplay", widget: "string" }
+              - { label: "WhatsApp as shown on screen", name: "whatsappDisplay", widget: "string" }
+              - { label: "Email", name: "email", widget: "string", required: false }
+          - label: "Location"
+            name: "location"
+            widget: "object"
+            fields:
+              - { label: "Shop/dairy address", name: "address", widget: "text" }
+              - { label: "Locality", name: "locality", widget: "string", required: false }
+              - { label: "City", name: "city", widget: "string" }
+              - { label: "State", name: "state", widget: "string" }
+              - { label: "Your base pincode", name: "pincode", widget: "string" }
+              - { label: "Google Maps embed URL", name: "mapEmbed", widget: "string", required: false }
+          - label: "Compliance"
+            name: "compliance"
+            widget: "object"
+            fields:
+              - { label: "FSSAI licence number (only if you hold one!)", name: "fssai", widget: "string" }
+          - label: "Rates"
+            name: "rates"
+            widget: "object"
+            fields:
+              - { label: "Cow milk", name: "cow", widget: "string" }
+              - { label: "Buffalo milk", name: "buffalo", widget: "string" }
+              - { label: "A2 milk", name: "a2", widget: "string" }
+              - { label: "Dahi", name: "dahi", widget: "string" }
+              - { label: "Paneer", name: "paneer", widget: "string" }
+              - { label: "Ghee", name: "ghee", widget: "string" }
+          - label: "Delivery"
+            name: "delivery"
+            widget: "object"
+            fields:
+              - { label: "Delivery window as printed", name: "time", widget: "string" }
+              - { label: "Opens (24h, for Google)", name: "opens", widget: "string", required: false }
+              - { label: "Closes (24h, for Google)", name: "closes", widget: "string", required: false }
+              - { label: "Minimum order", name: "minOrder", widget: "string" }
+              - { label: "Free delivery above", name: "freeDeliveryAbove", widget: "string", required: false }
+              - { label: "Order cut-off for next morning", name: "orderCutoff", widget: "string" }
+              - { label: "Delivery days", name: "days", widget: "string", required: false }
+          - label: "Payments"
+            name: "payments"
+            widget: "object"
+            fields:
+              - { label: "UPI ID / VPA", name: "upiId", widget: "string" }
+              - { label: "Payee name shown in UPI apps", name: "payeeName", widget: "string" }
+              - { label: "Your own UPI QR image path (test with ₹1 first!)", name: "upiQrImage", widget: "string" }
+          - label: "Offers"
+            name: "offers"
+            widget: "object"
+            fields:
+              - { label: "First-order offer", name: "firstOrder", widget: "string" }
+              - { label: "Referral offer", name: "referral", widget: "string" }
+              - { label: "Loyalty offer", name: "loyalty", widget: "string" }
+          - label: "Public claims (only numbers you can stand behind)"
+            name: "claims"
+            widget: "object"
+            fields:
+              - { label: "Homes served", name: "homesServed", widget: "string" }
+              - { label: "Litres per day", name: "litresDaily", widget: "string" }
+              - { label: "Bottle reuse count", name: "bottleReuse", widget: "string" }
+              - { label: "Dairy leave time", name: "dairyLeaveTime", widget: "string" }
+              - { label: "Rating", name: "rating", widget: "string" }
+              - { label: "Review count", name: "reviewCount", widget: "string" }
+          - label: "Links"
+            name: "links"
+            widget: "object"
+            fields:
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "Google Business profile", name: "gmb", widget: "string", required: false }
+              - { label: "Google Maps", name: "googleMaps", widget: "string", required: false }
+              - { label: "Live site URL", name: "siteUrl", widget: "string", required: false }
+          - label: "Bottle deposit"
+            name: "bottleDeposit"
+            widget: "object"
+            fields:
+              - { label: "Deposit amount (₹ per bottle)", name: "amount", widget: "string" }
+          - label: "Quality report"
+            name: "quality"
+            widget: "object"
+            fields:
+              - { label: "Lab name", name: "labName", widget: "string", required: false }
+              - { label: "Sample time", name: "sampledAt", widget: "string", required: false }
+              - { label: "Report updated at", name: "reportUpdated", widget: "string", required: false }
+              - { label: "Batch number format", name: "batchFormat", widget: "string", required: false }
+              - { label: "Fat", name: "fat", widget: "string", required: false }
+              - { label: "SNF", name: "snf", widget: "string", required: false }
+              - { label: "Protein", name: "protein", widget: "string", required: false }
+              - { label: "Temperature", name: "temperature", widget: "string", required: false }
+              - { label: "MBRT", name: "mbrt", widget: "string", required: false }
+              - { label: "Adulteration result", name: "adulteration", widget: "string", required: false }
+
+  - label: "Delivery areas"
+    name: "areas"
+    files:
+      - label: "Areas & customer segments"
+        name: "areas"
+        file: "content/areas.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Service areas"
+            name: "serviceAreas"
+            widget: "list"
+            fields:
+              - { label: "Area name", name: "name", widget: "string" }
+              - { label: "Slug (lowercase-with-dashes)", name: "slug", widget: "string" }
+              - { label: "Pincode(s)", name: "pincode", widget: "string" }
+              - { label: "Google Maps link", name: "mapLink", widget: "string", required: false }
+          - label: "Customer segments (B2B page)"
+            name: "customerSegments"
+            widget: "list"
+            fields:
+              - { label: "Key", name: "key", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+
+  - label: "Products"
+    name: "products"
+    files:
+      - label: "Product list"
+        name: "products"
+        file: "content/products.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            fields:
+              - { label: "ID (url-friendly, unique)", name: "id", widget: "string" }
+              - { label: "Name", name: "name", widget: "string" }
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["cow-milk", "a2-milk", "buffalo-milk", "curd", "paneer", "ghee", "butter", "khoya", "rabri", "peda", "lassi", "chaas", "shrikhand", "flavoured-milk"]
+              - { label: "Spec line (e.g. 500ml · Glass)", name: "spec", widget: "string" }
+              - { label: "Price (₹)", name: "price", widget: "number", value_type: "int", min: 0 }
+              - { label: "MRP (₹, struck through)", name: "mrp", widget: "number", value_type: "int", min: 0 }
+              - label: "Badge"
+                name: "badge"
+                widget: "select"
+                options: ["", "bestseller", "fresh-today"]
+                required: false
+              - { label: "Blurb", name: "blurb", widget: "text", required: false }
+
+  - label: "Plans"
+    name: "plans"
+    files:
+      - label: "Subscription plans"
+        name: "plans"
+        file: "content/plans.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Plans"
+            name: "plans"
+            widget: "list"
+            fields:
+              - label: "Key"
+                name: "key"
+                widget: "select"
+                options: ["trial", "weekly", "monthly", "family", "b2b"]
+              - { label: "Price label (e.g. ₹499/month or 'On request')", name: "priceLabel", widget: "string" }
+              - { label: "Volume (e.g. 1L daily)", name: "volume", widget: "string" }
+              - { label: "Note (internal)", name: "note", widget: "string", required: false }
+
+  - label: "Our cows"
+    name: "cows"
+    files:
+      - label: "Cow profiles & adopt-a-cow"
+        name: "cows"
+        file: "content/cows.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Cows"
+            name: "cows"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Breed", name: "breed", widget: "string" }
+              - { label: "Age", name: "age", widget: "string" }
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "One line about her", name: "note", widget: "text", required: false }
+          - label: "Adopt-a-cow"
+            name: "cowSponsor"
+            widget: "object"
+            fields:
+              - { label: "Monthly amount (₹)", name: "amount", widget: "string" }
+
+  - label: "Testimonials"
+    name: "testimonials"
+    files:
+      - label: "Customer reviews (real ones only!)"
+        name: "testimonials"
+        file: "content/testimonials.json"
+        format: "json"
+        editor:
+          preview: false
+        fields:
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Area", name: "area", widget: "string" }

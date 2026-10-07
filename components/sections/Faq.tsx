@@ -4,50 +4,34 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { SectionHeading } from "@/components/ui";
+import { useLang } from "@/lib/i18n";
 
-const faqs = [
-  {
-    q: "What makes A2 milk different from regular milk?",
-    a: "Most packaged milk blends crossbred cow milk carrying the A1 beta-casein protein. Ours comes only from indigenous Gir and Sahiwal herds on a single farm, so it is naturally A2-only. Many people find it easier to digest — and every batch is lab-tested, so you can read the report before the milk reaches your doorstep.",
-  },
-  {
-    q: "How do I choose my delivery slot?",
-    a: "Two slots run every morning: AM (5:30–7:30) for chai-time delivery and PM (7:00–9:00) for the evening. Pick a slot when you start a subscription and change it any day until 10 pm the night before — the change applies from the very next delivery.",
-  },
-  {
-    q: "How does the glass bottle deposit work?",
-    a: "We charge a fully refundable deposit of ₹25 per bottle at checkout. Leave the rinsed bottle at your door on any delivery day and we collect it and swap in a clean one. The deposit is credited straight back to your account whenever you end your subscription.",
-  },
-  {
-    q: "Can I pause my subscription?",
-    a: "Yes — pause for a weekend or a whole month from Manage Subscription, no questions asked. Mark the days by 10 pm the previous night and you are not charged a rupee for the skipped deliveries. Fasting months, travel, house guests: it all works.",
-  },
-  {
-    q: "What is the shelf life of your bilona ghee?",
-    a: "Nine months from the date of churning, stored at room temperature away from direct sunlight. No refrigeration needed — hand-churned bilona ghee only improves as it rests. The churning date is printed on every jar.",
-  },
-  {
-    q: "Can I see the daily test reports?",
-    a: "Every morning batch is tested for MBRT, antibiotics and adulterants before it leaves the farm. Reports are published by 7 am on the Daily Reports page and linked in your delivery notification, batch number by batch number.",
-  },
-  {
-    q: "Which areas do you cover?",
-    a: "We currently deliver to 42 neighbourhoods across Bengaluru — Indiranagar, Koramangala, Jayanagar, HSR Layout, Whitefield and more. Enter your pincode on the homepage to confirm same-morning coverage in your lane.",
-  },
-  {
-    q: "How do I return my bottles?",
-    a: "Rinse them and leave them at the doorstep on any delivery day — we collect on the spot. Each returned bottle credits ₹25 back to your account within 24 hours. Forgot to rinse? We still take them; they just rejoin the washing line a day later.",
-  },
-];
-
+/**
+ * Faq — bilingual Q&A from translations.faq (q1..q8).
+ * The earlier build hardcoded English questions here, one of which still said
+ * "42 neighbourhoods across Bengaluru" — that invented text is gone; every
+ * answer now reads from lib/translations.ts in the visitor's language.
+ */
 export default function Faq() {
   const [open, setOpen] = useState<number | null>(null);
+  const { t } = useLang();
+
+  const faqs = [
+    { q: t.faq.q1, a: t.faq.a1 },
+    { q: t.faq.q2, a: t.faq.a2 },
+    { q: t.faq.q3, a: t.faq.a3 },
+    { q: t.faq.q4, a: t.faq.a4 },
+    { q: t.faq.q5, a: t.faq.a5 },
+    { q: t.faq.q6, a: t.faq.a6 },
+    { q: t.faq.q7, a: t.faq.a7 },
+    { q: t.faq.q8, a: t.faq.a8 },
+  ];
 
   return (
     <section className="bg-buttermilk">
       <div className="mx-auto max-w-site px-6 py-24 lg:px-12">
         <div className="mx-auto max-w-3xl">
-          <SectionHeading overline="GOOD TO KNOW" title="Questions, answered" />
+          <SectionHeading overline="GOOD TO KNOW" title={t.faq.title} />
 
           <div className="mt-10">
             {faqs.map((item, i) => (
@@ -83,6 +67,8 @@ export default function Faq() {
               </div>
             ))}
           </div>
+
+          <p className="mt-8 text-center text-sm text-muted">{t.faq.askMore}</p>
         </div>
       </div>
     </section>

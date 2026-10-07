@@ -2,30 +2,33 @@
  * ============================================================================
  *  SHUBH MILK — BUSINESS CONFIG  (lib/businessConfig.ts)
  * ============================================================================
- *  This ONE file is the control panel for the whole website.
- *  Anything written in CAPITALS inside square brackets is a placeholder:
- *  replace it with your real detail and the site picks it up.
+ *  The business FACTS (phone, WhatsApp, FSSAI, rates, areas, plans, products,
+ *  cows, testimonials) now live in `content/*.json` so the admin panel
+ *  (/admin) can edit them without touching code.
+ *
+ *  This file wires that data into typed exports the site imports. Edit copy
+ *  in lib/translations.ts, layout in the components — but your numbers,
+ *  names and rates belong in content/ now.
  *
  *  Self-check after editing, from the project folder:
- *     rg -n "\[[A-Z0-9_]+\]" lib/businessConfig.ts lib/translations.ts
+ *     rg -n "\[[A-Z0-9_]+\]" content lib
  *
- *  HOW TO EDIT (only 3 rules):
- *    1. Change the VALUE, don't rename the key:
- *         phone: "[PHONE]"   ->   phone: "+919876543210"
- *    2. Don't delete the quotes " " and don't delete the comma , at the end.
- *    3. Hindi/English marketing copy lives in lib/translations.ts — this file is
- *       only for facts (numbers, links, names, rates).
+ *  HOW TO EDIT (two ways):
+ *    1. The admin panel — run `npm run admin` + `npm run dev`, open
+ *       http://localhost:3000/admin (see docs/ADMIN.md). This is the easy way.
+ *    2. By hand — open the matching file in content/ and replace the value.
+ *       Anything in CAPITALS inside square brackets is a placeholder.
  *
- *  CHECKLIST OF EVERYTHING TO FILL: see TODO.md in the project root.
- *  Every unfilled placeholder in this file is listed by missingPlaceholders() below.
- *
- *  NOTE / STATUS: this config is currently NOT yet wired into the existing
- *  components (Hero, Nav, Footer, FloatingWhatsApp …). The earlier code still
- *  has demo values inlined (e.g. "10012345678901", "+91 98450 00000",
- *  "919845000000"). Connecting each component to this file is the next step —
- *  until that is done, editing this file alone will not change those spots.
+ *  NOTE / STATUS: photos, feature flags and the site's sentences stay in
+ *  TypeScript on purpose: photos are design, and the Hindi/English copy is
+ *  type-checked so the two languages can never drift out of shape.
  * ============================================================================
  */
+
+import businessData from "@/content/business.json";
+import areaData from "@/content/areas.json";
+import planData from "@/content/plans.json";
+import cowData from "@/content/cows.json";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 0. HELPERS — nothing to edit below this block
@@ -38,65 +41,28 @@ const PLACEHOLDER_RE = /\[[A-Z0-9_]+\]/;
 export const isPlaceholder = (value: string): boolean => PLACEHOLDER_RE.test(value);
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 1. BRAND
+// 1. BRAND  (content/business.json → brand)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const brand = {
-  /** Short name used in the wordmark, schema.org and WhatsApp greeting. */
-  name: "Shubh Milk",
-  /** Registered/legal entity name for the footer + JSON-LD "legalName". */
-  legalName: "[LEGAL_NAME]",
-  /** GST number, if you are registered. "Not registered" is a valid value. */
-  gstin: "[GSTIN]",
-  /** The year the business actually started (used in "since …" copy). */
-  since: "[SINCE_YEAR]",
-} as const;
+export const brand = businessData.brand;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 2. CONTACT — the single most important block on the site
+//    (content/business.json → contact)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const contact = {
-  /** Dialable phone, country code included. Example: "+919876543210" */
-  phone: "[PHONE]",
-  /** WhatsApp number, country code included, NO + and NO spaces: "919876543210" */
-  whatsapp: "[WHATSAPP]",
-  /** How the phone number should LOOK on screen. Example: "+91 98765 43210" */
-  phoneDisplay: "[PHONE_DISPLAY]",
-  /** How the WhatsApp number should LOOK on screen. */
-  whatsappDisplay: "[WHATSAPP_DISPLAY]",
-  /** Business email for invoices / enquiries. */
-  email: "[EMAIL]",
-} as const;
+export const contact = businessData.contact;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. LOCATION & COMPLIANCE
+// 3. LOCATION & COMPLIANCE  (content/business.json → location, compliance)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const location = {
-  /** Full shop/dairy address, one or two lines. */
-  address: "[ADDRESS]",
-  /** Locality for schema.org (helps "milk delivery near me" searches). */
-  locality: "[LOCALITY]",
-  city: "Varanasi",
-  state: "Uttar Pradesh",
-  /** Your base pincode. */
-  pincode: "[PINCODE]",
-  /** Optional Google Maps embed URL (share → embed a map → copy src="…"). */
-  mapEmbed: "[GOOGLE_MAPS_EMBED]",
-} as const;
+export const location = businessData.location;
 
-export const compliance = {
-  /**
-   * Your real 14-digit FSSAI licence number.
-   * LEGAL NOTE: never publish a number you don't hold — it is shown in the
-   * trust bar, the footer and the JSON-LD schema.
-   */
-  fssai: "[FSSAI]",
-} as const;
+export const compliance = businessData.compliance;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. RATES — fill your real selling rates
+// 4. RATES  (content/business.json → rates, rateUnits)
 //    These are shown in the pricing table. Write them how you want them read,
 //    including the unit:  "[RATE_COW]",  or  "₹60 / L" once you know it.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -104,44 +70,16 @@ export const compliance = {
 export const rateKeys = ["cow", "buffalo", "a2", "dahi", "paneer", "ghee"] as const;
 export type RateKey = (typeof rateKeys)[number];
 
-export const rates: Record<RateKey, string> = {
-  cow: "[RATE_COW]",
-  buffalo: "[RATE_BUFFALO]",
-  a2: "[RATE_A2]",
-  dahi: "[RATE_DAHI]",
-  paneer: "[RATE_PANEER]",
-  ghee: "[RATE_GHEE]",
-};
+export const rates: Record<RateKey, string> = businessData.rates;
 
 /** Unit shown next to each rate. Edit only if your selling unit differs. */
-export const rateUnits: Record<RateKey, string> = {
-  cow: "/ litre",
-  buffalo: "/ litre",
-  a2: "/ litre",
-  dahi: "/ kg",
-  paneer: "/ kg",
-  ghee: "/ litre",
-};
+export const rateUnits: Record<RateKey, string> = businessData.rateUnits;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5. DELIVERY
+// 5. DELIVERY  (content/business.json → delivery; content/areas.json → areas)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const delivery = {
-  /** Human-readable delivery window, exactly as you want it printed. */
-  time: "[DELIVERY_TIME]",
-  /** Machine-readable hours for schema.org — 24h clock. */
-  opens: "[OPENS_24H]",
-  closes: "[CLOSES_24H]",
-  /** Minimum order value / quantity. Example: "1 litre" or "₹200" */
-  minOrder: "[MIN_ORDER]",
-  /** Free delivery above this order value. Example: "₹500" (or "Not offered"). */
-  freeDeliveryAbove: "[FREE_DELIVERY_ABOVE]",
-  /** Cut-off time to place or change an order for the next morning. */
-  orderCutoff: "[ORDER_CUTOFF]",
-  /** Delivery is daily, or does it include a weekly off? */
-  days: "[DELIVERY_DAYS]",
-} as const;
+export const delivery = businessData.delivery;
 
 export interface ServiceArea {
   /** Area name as customers say it. */
@@ -151,165 +89,70 @@ export interface ServiceArea {
   /** Pincode(s) served. Several pincodes? write "221001, 221005". */
   pincode: string;
   /** Google Maps link for this area (or leave the city link). */
-  mapLink: "[GOOGLE_MAPS_LINK]" | string;
+  mapLink: string;
 }
 
-/**
- * Every area you deliver to. Add or remove entries freely — the areas list,
- * the footer and the area landing pages all read from here.
- * Replace each [PINCODE] with the real pincode before you publish.
- */
-export const serviceAreas: ServiceArea[] = [
-  { name: "Lanka", slug: "lanka", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Assi", slug: "assi", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Bhelupur", slug: "bhelupur", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Sigra", slug: "sigra", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Mahmoorganj", slug: "mahmoorganj", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Ravindrapuri", slug: "ravindrapuri", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Sarnath", slug: "sarnath", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Cantt", slug: "cantt", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Pandeypur", slug: "pandeypur", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Teliyabagh", slug: "teliyabagh", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  { name: "Orderly Bazar", slug: "orderly-bazar", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-  /** Add more rows in this shape if you expand. */
-  { name: "[AREA_NAME]", slug: "[AREA_SLUG]", pincode: "[PINCODE]", mapLink: "[GOOGLE_MAPS_LINK]" },
-];
+/** Every area you deliver to — edited in the admin panel (content/areas.json). */
+export const serviceAreas: ServiceArea[] = areaData.serviceAreas;
 
 /**
  * Who you deliver to — used by the "Who we serve" section and the B2B plan card.
+ * (content/areas.json → customerSegments)
  */
-export const customerSegments = [
-  { key: "families", label: "[SEGMENT_FAMILIES]" },
-  { key: "hostels", label: "[SEGMENT_HOSTELS]" },
-  { key: "cafes", label: "[SEGMENT_CAFES]" },
-  { key: "chaistalls", label: "[SEGMENT_CHAI_STALLS]" },
-  { key: "sweetshops", label: "[SEGMENT_SWEET_SHOPS]" },
-  { key: "hotels", label: "[SEGMENT_HOTELS]" },
-  { key: "ashrams", label: "[SEGMENT_ASHRAMS]" },
-] as const;
+export const customerSegments = areaData.customerSegments;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 6. PAYMENTS & LOYALTY
+// 6. PAYMENTS, OFFERS & CLAIMS
+//    (content/business.json → payments, offers, claims)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const payments = {
-  /** Your UPI ID / VPA. Example: "shubhmilk@okhdfcbank" */
-  upiId: "[UPI_ID]",
-  /** Name shown in the customer's UPI app when they pay. */
-  payeeName: "[PAYEE_NAME]",
-  /**
-   * Image of YOUR OWN UPI QR (generate it in your bank/GPay/PhonePe app,
-   * screenshot it, drop the file in /public/images/ and put the path here).
-   * Never ship a QR you have not tested with a ₹1 payment.
-   */
-  upiQrImage: "[UPI_QR_IMAGE]",
-  /** Payment modes you actually accept. */
-  methods: ["UPI", "Cash on delivery", "Monthly bill"] as string[],
-} as const;
+export const payments = businessData.payments;
 
-export const offers = {
-  /** First-order offer (the footer's offer card + newsletter reply use this). */
-  firstOrder: "[FIRST_ORDER_OFFER]",
-  /** Referral offer. Brief said: "Friend ko refer karein, 1 litre free." */
-  referral: "[REFERRAL_OFFER]",
-  /** Loyalty offer. Brief said: "10th delivery pe 1 litre free." */
-  loyalty: "[LOYALTY_OFFER]",
-} as const;
+export const offers = businessData.offers;
+
+/**
+ * 6b. CLAIMS — numbers you state publicly about your business.
+ *     Every one of these is a factual claim a customer can check. Only publish
+ *     a figure you can stand behind.
+ */
+export const claims = businessData.claims;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 6b. CLAIMS — numbers you state publicly about your business
-//     Every one of these is a factual claim a customer can check. Only publish
-//     a figure you can stand behind; the previous build said "12,000+ homes" and
-//     "since 2019", which were never verified. Fill these in or delete the line
-//     and remove the matching row from the section that shows it.
-// ─────────────────────────────────────────────────────────────────────────────
-
-export const claims = {
-  /** e.g. "2,000+" — how many homes you actually deliver to. */
-  homesServed: "[HOMES_SERVED]",
-  /** e.g. "450" — litres you actually sell per day. */
-  litresDaily: "[LITRES_DAILY]",
-  /** e.g. "40" — how many times a glass bottle really gets reused. */
-  bottleReuse: "[BOTTLE_REUSE_COUNT]",
-  /** e.g. "4:30 AM" — the time milk actually leaves your dairy. */
-  dairyLeaveTime: "[DAIRY_LEAVE_TIME]",
-  /** e.g. "4.8" — your real average rating. */
-  rating: "[RATING]",
-  /** e.g. "120+" — how many reviews you actually have. */
-  reviewCount: "[REVIEW_COUNT]",
-} as const;
-
-// ─────────────────────────────────────────────────────────────────────────────
-// 7. SUBSCRIPTION PLANS
-//    Prices: [PLAN_PRICE] is the main monthly price. The per-plan placeholders
-//    below let you price every tier separately — use only the ones you need.
+// 7. SUBSCRIPTION PLANS  (content/plans.json)
+//    Prices are text fields so you can write "₹60 / L" or "On request".
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface Plan {
   key: "trial" | "weekly" | "monthly" | "family" | "b2b";
-  /** Price as printed for the customer. A text field, not a number, so you can
-   *  write "₹60 / L" or "On request" per plan. */
+  /** Price as printed for the customer. */
   priceLabel: string;
   /** What the customer gets, short. */
   volume: string;
-  /** Extra business rule you want stored with the plan. */
+  /** Extra business rule stored with the plan. */
   note: string;
 }
 
-export const plans: Plan[] = [
-  {
-    key: "trial",
-    priceLabel: "[PLAN_PRICE_TRIAL]",
-    volume: "[PLAN_VOLUME_TRIAL]",
-    note: "Free trial — 2 days. Fixed by the brief.",
-  },
-  {
-    key: "weekly",
-    priceLabel: "[PLAN_PRICE_WEEKLY]",
-    volume: "[PLAN_VOLUME_WEEKLY]",
-    note: "Weekly plan.",
-  },
-  {
-    key: "monthly",
-    priceLabel: "[PLAN_PRICE]",
-    volume: "[PLAN_VOLUME_MONTHLY]",
-    note: "Monthly plan — the main conversion.",
-  },
-  {
-    key: "family",
-    priceLabel: "[PLAN_PRICE_FAMILY]",
-    volume: "[PLAN_VOLUME_FAMILY]",
-    note: "Family pack — 2L / 3L daily.",
-  },
-  {
-    key: "b2b",
-    priceLabel: "[PLAN_PRICE_B2B]",
-    volume: "[PLAN_VOLUME_B2B]",
-    note: "Hostel / PG / cafe / hotel — quote-based, min quantity in [B2B_MIN_QTY].",
-  },
-];
+const planKeys = ["trial", "weekly", "monthly", "family", "b2b"] as const;
+
+export const plans: Plan[] = planData.plans.flatMap((raw) =>
+  (planKeys as readonly string[]).includes(raw.key)
+    ? [{ key: raw.key as Plan["key"], priceLabel: raw.priceLabel, volume: raw.volume, note: raw.note }]
+    : [],
+);
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 8. LINKS & SOCIAL
+// 8. LINKS & SOCIAL  (content/business.json → links)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const links = {
-  instagram: "[INSTAGRAM_LINK]",
-  /** Google My Business profile link (review requests point here). */
-  gmb: "[GMB_LINK]",
-  /** Google Maps location of your service area / shop (privacy-safe, not home). */
-  googleMaps: "[GOOGLE_MAPS_LINK]",
-  /** Live site URL, used for canonical tags and JSON-LD. */
-  siteUrl: "[SITE_URL]",
-} as const;
+export const links = businessData.links;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 9. PHOTOS
+//    Photo slots stay here: they are design decisions, not business facts.
 //    Every entry points at /images/placeholder.jpg so the site never breaks.
 //    To use a real photo: drop the file in /public/images/ and write the path
 //    in `src` (e.g. "/images/hero-dawn.jpeg"), then delete its `replaceWith`
-//    line. `alt` is what screen readers and Google read — describe the real
-//    photo you intend to shoot.
+//    line. `alt` is what screen readers and Google read.
 //    (This repo already ships real photos in /public/images/ — you can reuse
 //    them right away; see TODO.md.)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -347,7 +190,50 @@ export const photos = {
 export type PhotoKey = keyof typeof photos;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 10. FEATURE FLAGS — turn things on as you go
+// 9b. BOTTLE DEPOSIT  (content/business.json → bottleDeposit)
+//     ONE number, read by the product page, the FAQ and the return policy.
+//     The figure is written down only here, so the site can never disagree
+//     with itself about it.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const bottleDeposit = businessData.bottleDeposit;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 9c. QUALITY & TESTING  (content/business.json → quality)
+//     What you check every morning, and the figures your lab reports.
+//     LEGAL NOTE: publish only numbers a laboratory actually gave you. Until the
+//     real values are typed in, the site prints the [TOKEN] on purpose — an
+//     obvious gap is far better than a confident invented reading.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const quality = businessData.quality;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 9d. COW PROFILES / "ADOPT A COW"  (content/cows.json)
+//     One entry per animal customers can meet. An adopted-cow plan is only
+//     real once you decide the amount and what the sponsor receives.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface CowProfile {
+  /** The animal's name, as your family calls her. */
+  name: string;
+  /** Breed — Gir, Sahiwal, Tharparkar ... */
+  breed: string;
+  /** Age as you want it printed. */
+  age: string;
+  /** Photo already in /public/images (or your own path). */
+  photo: string;
+  /** One line about her, in your own words. */
+  note: string;
+}
+
+export const cows: CowProfile[] = cowData.cows;
+
+/** Monthly amount for the adopt-a-cow plan. Empty until you decide it. */
+export const cowSponsor = cowData.cowSponsor;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 10. FEATURE FLAGS — turn things on as you go (stays in code)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const flags = {
@@ -383,6 +269,10 @@ export const businessConfig = {
   plans,
   links,
   photos,
+  bottleDeposit,
+  quality,
+  cows,
+  cowSponsor,
   flags,
 } as const;
 
@@ -416,7 +306,7 @@ export const upiLink = (amount: string | number, note: string): string => {
 export const hasMissingPlaceholders = (): boolean => missingPlaceholders().length > 0;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// PLACEHOLDER AUDIT — lists every [TOKEN] still left in this file
+// PLACEHOLDER AUDIT — lists every [TOKEN] still left in content/ + this file
 // ─────────────────────────────────────────────────────────────────────────────
 
 const walk = (node: unknown, path: string, out: string[]): void => {

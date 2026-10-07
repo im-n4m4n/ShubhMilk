@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "@fontsource/fraunces/latin-400.css";
 import "@fontsource/fraunces/latin-500.css";
 import "@fontsource/fraunces/latin-600.css";
@@ -42,6 +43,12 @@ export default function RootLayout({
           <Toasts />
           <SmoothScroll>{children}</SmoothScroll>
         </LanguageProvider>
+        {/* Razorpay checkout.js — lazy: loads after first paint, only ever
+            needed if a customer actually opens the cart and pays. */}
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

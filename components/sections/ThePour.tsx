@@ -62,21 +62,87 @@ export default function ThePour() {
           },
         });
 
-        /* Text beats: one scrubbed timeline per beat, created once. */
+        /* Text beats: ONE master timeline spanning the section's whole scroll
+         * range, with each beat placed at its own `at` progress.
+         *
+         * This replaces one-ScrollTrigger-per-beat choreography that was wrong
+         * in two separate ways, both visible as the copy piling up on top of
+         * itself:
+         *
+         * 1. A beat's checkpoint was measured as a percentage of the SECTION
+         *    (`top+=${at * 100}%`), but the pin only lasts the section height
+         *    MINUS one viewport (`bottom bottom`). On a 300vh section and an
+         *    802px viewport that is 2406px of scrolling for a pin that releases
+         *    after 2406 - 802 = 1604px, so the last beat's 0.85 checkpoint
+         *    (0.85 x 2406 = 2045px) sat ~440px PAST the release and could never
+         *    be reached while pinned — it held at opacity 0 and never appeared.
+         *
+         * 2. A scrubbed `fromTo` only interpolates inside its own start/end
+         *    window; after that the element keeps its end state. Nothing ever
+         *    faded a beat OUT, so beat 1 was still fully legible at the end of
+         *    the section while beat 2 faded in underneath it.
+         *
+         * Positioning the timeline on the same start/end as the pin makes `at`
+         * mean "progress through the pinned range", which is what the design
+         * intends; the explicit fade-out gives each beat a handover.
+         */
         const beatEls = gsap.utils.toArray<HTMLElement>("[data-beat]");
-        beatEls.forEach((el, i) => {
-          const from = beats[i]?.at ?? 0;
-          gsap
-            .timeline({
-              scrollTrigger: {
-                trigger: sectionEl,
-                start: `top+=${from * 100}% top`,
-                end: `top+=${(from + 0.12) * 100}% top`,
-                scrub: true,
-              },
-            })
-            .fromTo(el, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, ease: "power3.out" });
+        /* How long a beat takes to fade in, and to fade out again, as a share
+         * of the pinned range. 0.06 * 1600px ≈ 96px of scroll. */
+        const BEAT_FADE = 0.06;
+
+        const beatTl = gsap.timeline({
+          defaults: { ease: "power3.out" },
+          scrollTrigger: {
+            trigger: sectionEl,
+            /* Deliberately identical to the pin's start/end below, so
+               progress 0 is the moment the section sticks and progress 1 is the
+               moment it releases. */
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          },
         });
+
+        beatEls.forEach((el, i) => {
+          const at = beats[i]?.at ?? 0;
+          const nextAt = beats[i + 1]?.at ?? 1;
+          const isLast = i === beatEls.length - 1;
+
+          const fadeInEnd = Math.min(at + BEAT_FADE, nextAt);
+          beatTl.fromTo(
+            el,
+            { autoAlpha: 0, y: 24 },
+            { autoAlpha: 1, y: 0, duration: Math.max(0.001, fadeInEnd - at) },
+            at,
+          );
+
+          /* Not the last beat: fade out so the exit finishes exactly as the
+             next beat begins its fade-in. That guarantees no two beats are ever
+             legible at once, and no blank gap between them either. */
+          if (!isLast) {
+            const holdEnd = Math.max(fadeInEnd, nextAt - BEAT_FADE);
+            beatTl.to(
+              el,
+              { autoAlpha: 0, y: -24, duration: Math.max(0.001, nextAt - holdEnd) },
+              holdEnd,
+            );
+          }
+        });
+
+        /* Pad the timeline out to a total duration of exactly 1.
+         *
+         * A timeline's duration is however long its LAST child ends, which here
+         * would be 0.91 (the final beat's fade-in). GSAP then stretches the whole
+         * timeline across the scroll range, so every `at` above would land ~10%
+         * later than the number says — measured, beat 1 reached full opacity at
+         * 0.32 instead of 0.31 and beat 3 only at 1.0 instead of 0.91.
+         * A zero-effect tween ending at 1 pins the total, so `at` is a literal
+         * fraction of the pinned range again. (A `duration` in the timeline's
+         * own config does not do this — GSAP derived 0.91 from the children
+         * here and ignored it.)
+         */
+        beatTl.to({}, { duration: 0.001 }, 0.999);
 
         /* Slow rotating mandala behind the canvas; pauses when off-screen. */
         const spin = gsap.to(mandala.current, {
